@@ -342,14 +342,34 @@ namespace ConciliadorDeNotas
                 if (produtoBanco == null)
                 {
                     produto.STATUS = STATUS.NaoConciliado;
-                }else if(
-                    produtoBanco.NCM != produto.NCM ||
-                    produtoBanco.CFOP != produto.CFOP ||
-                    produtoBanco.CEST != produto.CEST ||
-                    produtoBanco.CST != produto.CST)
+                    continue;
+                }
+
+                if(produto.NCM != produtoBanco.NCM)
                 {
                     produto.STATUS = STATUS.Invalido;
-                }else
+                    produto.listaErros.Add(String.Format("NCM - Atual: {0}, Correto: {1}", produto.NCM, produtoBanco.NCM));
+                }
+
+                if (produto.CFOP != produtoBanco.CFOP)
+                {
+                    produto.STATUS = STATUS.Invalido;
+                    produto.listaErros.Add(String.Format("CFOP - Atual: {0}, Correto: {1}", produto.CFOP, produtoBanco.CFOP));
+                }
+
+                if (produto.CEST != produtoBanco.CEST)
+                {
+                    produto.STATUS = STATUS.Invalido;
+                    produto.listaErros.Add(String.Format("CEST - Atual: {0}, Correto: {1}", produto.CEST, produtoBanco.CEST));
+                }
+
+                if (produto.CST != produtoBanco.CST)
+                {
+                    produto.STATUS = STATUS.Invalido;
+                    produto.listaErros.Add(String.Format("CST - Atual: {0}, Correto: {1}", produto.CST, produtoBanco.CST));
+                }
+
+                if(produto.listaErros.Count == 0)
                 {
                     produto.STATUS = STATUS.Valido;
                 }

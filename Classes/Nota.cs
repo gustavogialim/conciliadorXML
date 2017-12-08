@@ -144,12 +144,16 @@ namespace Classes
                 /// CST
                 /// </summary>
                 public string CST { get; set; }
-
                 /// <summary>
                 /// Conciliado - Define se o produto da nota foi conciliado  com o do banco
                 /// </summary>
                 [NotMapped]
                 public STATUS STATUS { get; set; }
+                /// <summary>
+                /// listaErros - Lista de erros da conciliação
+                /// </summary>
+                [NotMapped]
+                public List<string> listaErros { get; set; } = new List<string>();
             }
 
             public class Imposto
