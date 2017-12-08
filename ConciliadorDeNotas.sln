@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConciliadorDeNotas", "ConciliadorDeNotas\ConciliadorDeNotas.csproj", "{24E513E8-5653-49C6-8314-097C720CE831}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classes", "Classes\Classes.csproj", "{F1EEBA5E-E4D3-451E-AC1B-4D518D758FD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestrutura", "Infraestrutura\Infraestrutura.csproj", "{8BCF74B7-A5F3-4611-A50D-3F132A73DE66}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{24E513E8-5653-49C6-8314-097C720CE831}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24E513E8-5653-49C6-8314-097C720CE831}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24E513E8-5653-49C6-8314-097C720CE831}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24E513E8-5653-49C6-8314-097C720CE831}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1EEBA5E-E4D3-451E-AC1B-4D518D758FD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1EEBA5E-E4D3-451E-AC1B-4D518D758FD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1EEBA5E-E4D3-451E-AC1B-4D518D758FD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1EEBA5E-E4D3-451E-AC1B-4D518D758FD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BCF74B7-A5F3-4611-A50D-3F132A73DE66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BCF74B7-A5F3-4611-A50D-3F132A73DE66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BCF74B7-A5F3-4611-A50D-3F132A73DE66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BCF74B7-A5F3-4611-A50D-3F132A73DE66}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

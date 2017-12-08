@@ -1,0 +1,111 @@
+﻿<Window x:Class="ConciliadorDeNotas.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ConciliadorDeNotas"
+        mc:Ignorable="d"
+        Title="Conciliador de Notas" Height="500" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid x:Name="Conciliador">
+        <Grid x:Name="LayoutRoot" Background="White">
+
+            <Grid.RowDefinitions>
+                <RowDefinition MinHeight="22" Height="22"/>
+                <RowDefinition MinHeight="180" Height="180"/>
+                <RowDefinition Height="270"/>
+            </Grid.RowDefinitions>
+
+            <Menu Grid.Row="0" x:Name="menu" HorizontalAlignment="Stretch" Height="22" VerticalAlignment="Top"  Background="AliceBlue" FontSize="14">
+                <MenuItem Header="Arquivo">
+                    <MenuItem Header="Importar XML" Click="MenuItem_Click_1">
+                        <MenuItem.Icon>
+                            <Image Source="/imgs/xml.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Importar TXT">
+                        <MenuItem.Icon>
+                            <Image Source="/imgs/txt.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Cadastro de Produtos">
+                        <MenuItem.Icon>
+                            <Image Source="/imgs/product.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="Sair" Click="MenuItem_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/imgs/exit.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Sobre">
+                    <MenuItem Header="Ajuda">
+                        <MenuItem.Icon>
+                            <Image Source="/imgs/help.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="Sobre o sistema">
+                        <MenuItem.Icon>
+                            <Image Source="/imgs/about.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+
+            <Button x:Name="btnXML" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="White" Click="btnXML_Click" Cursor="Hand" BorderThickness="0" Width="396">
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="203">
+                    <Image Source="/imgs/xml.png" Width="128" Height="128" Margin="10,40,0,0" HorizontalAlignment="Left"/>
+                    <TextBlock TextAlignment="Left" FontSize="28" Text="Importar XML" Margin="140,-125,0,0" Height="40" HorizontalAlignment="Left" Width="214"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="btnTXT" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="396,0,0,0" Background="White" Cursor="Hand" BorderThickness="0" Width="396" Click="btnTXT_Click">
+                <StackPanel VerticalAlignment="Stretch" Height="203">
+                    <Image Source="/imgs/txt.png" Width="128" Height="128" Margin="10,40,0,0" HorizontalAlignment="Left"/>
+                    <TextBlock TextAlignment="Left" FontSize="28" Text="Importar TXT" Margin="140,-125,0,0" Height="40" HorizontalAlignment="Left" Width="237"/>
+                </StackPanel>
+            </Button>
+
+            <Border Grid.Row="2" BorderBrush="Black" Margin="0,0,0,0" Height="37" Background="#FF004F9E" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <TextBlock  Foreground="White" FontSize="23" Height="30" Text="Análise" TextAlignment="Center" />
+                </StackPanel>
+            </Border>
+
+            <GroupBox Visibility="Visible" x:Name="groupBoxDados"  FontSize="14" HorizontalAlignment="Left" Height="136" Margin="10,42,0,0" Grid.Row="2" VerticalAlignment="Top" Width="772">
+                <GroupBox.Header>
+                    <TextBlock FontSize="16" FontWeight="Bold" Text="Dados Importados"></TextBlock>
+                </GroupBox.Header>
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <TextBlock Visibility="Visible" x:Name="labelCliente" Margin="0,0,0,2" Text="Cliente: TKS COMERCIO IMPORTACAO E EXPORTCAO LTDA"></TextBlock>
+                    <TextBlock Visibility="Visible" x:Name="labelCNPJ" Margin="0,0,0,2" Text="CNPJ: 23647730000184"></TextBlock>
+                    <TextBlock Visibility="Visible" x:Name="labelDataEmissao" Margin="0,0,0,2" Text="Data de emissão: 10/03/2017"></TextBlock>
+                    <TextBlock Visibility="Visible" x:Name="labelProdutos" Margin="0,0,0,2" Text="Produtos encontrados: 1"></TextBlock>
+                </StackPanel>
+            </GroupBox>
+
+            <Button x:Name="btnSalvarProdutos" Cursor="Hand" Grid.Row="2" Width="190" Height="25" FontSize="14" Margin="10,179,592,66" FontWeight="Bold" Background="#FFF3F3F3" BorderThickness="0" Click="btnSalvarProdutos_Click">Salvar produtos da XML</Button>
+
+            <Canvas Grid.Row="2">
+                <TextBlock x:Name="labelAnaliseFinalizada" Grid.Row="2" Foreground="#FF0FAA00" Visibility="Visible" FontWeight="Normal" Text="Análise finalizada." FontSize="14" Width="114" Height="17" Canvas.Left="668" Canvas.Top="243"/>
+
+                <Ellipse x:Name="elipseProdutosConciliados" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FF3AAE3A" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="432" Canvas.Top="187"  />
+                <TextBlock x:Name="labelProdutosConciliados" Grid.Row="2" Visibility="Visible" FontWeight="Normal" Text="0 Produtos Válidos." FontSize="12" Width="150" Height="17" Canvas.Left="451" Canvas.Top="184"/>
+                <Ellipse x:Name="elipseProdutosNaoConciliados" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FFDC5F5F" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="609" Canvas.Top="187" />
+                <TextBlock x:Name="labelProdutosNaoConciliados" Grid.Row="2" Visibility="Visible" FontWeight="Normal" Text="0 Produtos Inválidos." FontSize="12" Width="152" Height="17" Canvas.Left="628" Canvas.Top="184"/>
+            </Canvas>
+
+            <TextBlock x:Name="labelDadosResultadoAnaliseMensagem" Grid.Row="2" Foreground="Black" FontSize="36" Height="50" Text="Dados e Resultado da Análise" TextAlignment="Center" />
+
+            <Border x:Name="btnVerResultados" Grid.Row="2" BorderBrush="Black" Margin="0,207,0,0" Height="37" Background="#FF001B36" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <TextBlock  Foreground="White" FontSize="23" Height="30" Text="Ver Resultados" TextAlignment="Center" />
+                </StackPanel>
+            </Border>
+
+        </Grid>
+
+    </Grid>
+</Window>

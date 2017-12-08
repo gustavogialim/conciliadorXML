@@ -1,0 +1,16 @@
+C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Infraestrutura\bin\Debug\Infraestrutura.dll.config
+C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Infraestrutura\bin\Debug\Infraestrutura.dll
+C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Infraestrutura\bin\Debug\Infraestrutura.pdb
+C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Infraestrutura\bin\Debug\Classes.dll
+C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Infraestrutura\bin\Debug\EntityFramework.dll
+C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Infraestrutura\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Infraestrutura\bin\Debug\System.Data.SQLite.dll
+C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Infraestrutura\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Infraestrutura\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Infraestrutura\bin\Debug\Classes.pdb
+C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Infraestrutura\bin\Debug\EntityFramework.xml
+C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Infraestrutura\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Infraestrutura\bin\Debug\System.Data.SQLite.xml
+C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Infraestrutura\obj\Debug\Infraestrutura.csprojResolveAssemblyReference.cache
+C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Infraestrutura\obj\Debug\Infraestrutura.dll
+C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Infraestrutura\obj\Debug\Infraestrutura.pdb
