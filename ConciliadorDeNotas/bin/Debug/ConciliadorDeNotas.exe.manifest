@@ -42,26 +42,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Classes.dll" size="9216">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Classes.dll" size="10240">
       <assemblyIdentity name="Classes" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>cbtVzrSHzrjkMdXfjOS55OIh+lyyLGntY9+JvElCLSs=</dsig:DigestValue>
+        <dsig:DigestValue>eDtR1EjmqzF3lTTebTLWcGBsDhOsOb6W9d2IPGqXU7I=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ConciliadorDeNotas.exe" size="49664">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ConciliadorDeNotas.exe" size="57344">
       <assemblyIdentity name="ConciliadorDeNotas" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>IUHvzRCshfKhG79MuL96JLLHgMegZuPuwr2+p7eGNfc=</dsig:DigestValue>
+        <dsig:DigestValue>BcI5cdy6d+zsZ2KEWeHhOBkcHYagTItAWEsxHKk7Qpo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -90,6 +90,18 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Enums.dll" size="4096">
+      <assemblyIdentity name="Enums" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>9QuDrMNnWCYoc63TSZAam9HagPlQ6JV55BIN0RB/n48=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Infraestrutura.dll" size="6144">
       <assemblyIdentity name="Infraestrutura" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -97,7 +109,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>FsGWvCy8n0Co66/I089LlipSGDcj5VLUAungpDkM2xs=</dsig:DigestValue>
+        <dsig:DigestValue>bUZyorxz3aC6gQl7W4vzWLpjSDLTyULSoT1juM+zczI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

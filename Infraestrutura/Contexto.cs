@@ -29,6 +29,6 @@ namespace Infraestrutura
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Produto> Produto { get; set; }
+        public DbSet<Nota.det.Prod> Produto { get; set; }
     }
 }
