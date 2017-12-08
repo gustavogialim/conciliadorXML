@@ -91,10 +91,12 @@
             <Canvas Grid.Row="2">
                 <TextBlock x:Name="labelAnaliseFinalizada" Grid.Row="2" Foreground="#FF0FAA00" Visibility="Visible" FontWeight="Normal" Text="Análise finalizada." FontSize="14" Width="114" Height="17" Canvas.Left="668" Canvas.Top="243"/>
 
-                <Ellipse x:Name="elipseProdutosConciliados" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FF3AAE3A" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="432" Canvas.Top="187"  />
-                <TextBlock x:Name="labelProdutosConciliados" Grid.Row="2" Visibility="Visible" FontWeight="Normal" Text="0 Produtos Válidos." FontSize="12" Width="150" Height="17" Canvas.Left="451" Canvas.Top="184"/>
-                <Ellipse x:Name="elipseProdutosNaoConciliados" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FFDC5F5F" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="609" Canvas.Top="187" />
-                <TextBlock x:Name="labelProdutosNaoConciliados" Grid.Row="2" Visibility="Visible" FontWeight="Normal" Text="0 Produtos Inválidos." FontSize="12" Width="152" Height="17" Canvas.Left="628" Canvas.Top="184"/>
+                <Ellipse x:Name="elipseProdutosNaoConciliados" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FF3D9EFF" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="260" Canvas.Top="187"  />
+                <TextBlock x:Name="labelProdutosNaoConciliados" Grid.Row="2" Visibility="Visible" FontWeight="Normal" Text="0 Produtos não conciliados." FontSize="12" Width="152" Height="17" Canvas.Left="275" Canvas.Top="184"/>
+                <Ellipse x:Name="elipseProdutosValidos" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FF3AAE3A" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="452" Canvas.Top="187"  />
+                <TextBlock x:Name="labelProdutosValidos" Grid.Row="2" Visibility="Visible" FontWeight="Normal" Text="0 Produtos Válidos." FontSize="12" Width="115" Height="17" Canvas.Left="471" Canvas.Top="184"/>
+                <Ellipse x:Name="elipseProdutosInvalidos" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FFDC5F5F" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="609" Canvas.Top="187" />
+                <TextBlock x:Name="labelProdutosInvalidos" Grid.Row="2" Visibility="Visible" FontWeight="Normal" Text="0 Produtos Inválidos." FontSize="12" Width="152" Height="17" Canvas.Left="628" Canvas.Top="184"/>
             </Canvas>
 
             <TextBlock x:Name="labelDadosResultadoAnaliseMensagem" Grid.Row="2" Foreground="Black" FontSize="36" Height="50" Text="Dados e Resultado da Análise" TextAlignment="Center" />

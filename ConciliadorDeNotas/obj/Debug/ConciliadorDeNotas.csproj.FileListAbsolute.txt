@@ -48,3 +48,35 @@ C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\Concil
 C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.csproj.GenerateResource.Cache
 C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.exe.manifest
 C:\Users\Gustavo\Documents\Visual Studio 2015\Projects\ConciliadorDeNotas\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.application
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\ConciliadorDeNotas.exe.config
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.exe
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.pdb
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\ConciliadorDeNotas.exe.manifest
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\ConciliadorDeNotas.application
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\ConciliadorDeNotas.exe
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\ConciliadorDeNotas.pdb
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Classes.dll
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\EntityFramework.dll
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Infraestrutura.dll
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\System.Data.SQLite.dll
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Classes.pdb
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Infraestrutura.pdb
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\EntityFramework.xml
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\System.Data.SQLite.xml
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.csprojResolveAssemblyReference.cache
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\MainWindow.g.cs
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\App.g.cs
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas_MarkupCompile.cache
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas_MarkupCompile.lref
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\MainWindow.baml
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.g.resources
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.Properties.Resources.resources
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.csproj.GenerateResource.Cache
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.exe.manifest
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.application
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Enums.dll
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Enums.pdb

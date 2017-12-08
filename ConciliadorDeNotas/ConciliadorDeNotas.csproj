@@ -182,6 +182,10 @@
       <Project>{F1EEBA5E-E4D3-451E-AC1B-4D518D758FD8}</Project>
       <Name>Classes</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Enums\Enums.csproj">
+      <Project>{96AF70F3-645A-4520-AA58-9E17A4829686}</Project>
+      <Name>Enums</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Infraestrutura\Infraestrutura.csproj">
       <Project>{8BCF74B7-A5F3-4611-A50D-3F132A73DE66}</Project>
       <Name>Infraestrutura</Name>
