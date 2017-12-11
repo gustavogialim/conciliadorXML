@@ -27,7 +27,7 @@
                             <Image Source="/imgs/txt.png"></Image>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Cadastro de Produtos">
+                    <MenuItem Header="Cadastro de Produtos" Click="MenuItem_Click_2">
                         <MenuItem.Icon>
                             <Image Source="/imgs/product.png"></Image>
                         </MenuItem.Icon>

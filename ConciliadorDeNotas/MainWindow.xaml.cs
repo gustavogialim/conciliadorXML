@@ -422,5 +422,11 @@ namespace ConciliadorDeNotas
         {
             btnXML_Click(null, null);
         }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            CadastroDeProdutos cadastroDeProdutos = new CadastroDeProdutos(Content);
+            this.Content = cadastroDeProdutos;
+        }
     }
 }

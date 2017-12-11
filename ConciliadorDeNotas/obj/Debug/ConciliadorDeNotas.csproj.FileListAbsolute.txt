@@ -80,3 +80,5 @@ C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\Co
 C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.application
 C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Enums.dll
 C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Enums.pdb
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\CadastroDeProdutos.g.cs
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\CadastroDeProdutos.baml
