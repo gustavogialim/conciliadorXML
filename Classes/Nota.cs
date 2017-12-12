@@ -141,9 +141,17 @@ namespace Classes
                 [NotMapped]
                 public int indTot { get; set; }
                 /// <summary>
-                /// CST
+                /// CST ICMS
                 /// </summary>
                 public string CST { get; set; }
+                /// <summary>
+                /// CST PIS
+                /// </summary>
+                public string CST_PIS { get; set; }
+                /// <summary>
+                /// CST COFINS
+                /// </summary>
+                public string CST_COFINS { get; set; }
                 /// <summary>
                 /// Conciliado - Define se o produto da nota foi conciliado  com o do banco
                 /// </summary>

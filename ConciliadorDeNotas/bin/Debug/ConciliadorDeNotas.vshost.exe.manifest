@@ -42,26 +42,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Classes.dll" size="10752">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Classes.dll" size="11264">
       <assemblyIdentity name="Classes" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>enb8vcq/4kKtCu3Ejjn3wRZz5sGwyIjnAtTEP+rIJhw=</dsig:DigestValue>
+        <dsig:DigestValue>8FQ6cfNFOs28j95Ix1EPOAALj/6tWsHzW7xiz+B6xQA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ConciliadorDeNotas.exe" size="61952">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ConciliadorDeNotas.exe" size="68608">
       <assemblyIdentity name="ConciliadorDeNotas" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lnF83tIc6ejga7eQ66AC4zngiw198zrGZayVM4kRhuA=</dsig:DigestValue>
+        <dsig:DigestValue>Au57KI8YkgAUKuSN9gWg1rXqs+qNZToJxmbPIehWY8E=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -109,7 +109,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>BX2keY2bOVvhgdHTGiCDxEprX6KPWpITCHownFRfmk8=</dsig:DigestValue>
+        <dsig:DigestValue>PNGv+bGZ7NX5Ubi6Zfk5oaUSWPp4cAzpdsLj2or93VY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

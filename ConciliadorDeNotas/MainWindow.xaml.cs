@@ -79,7 +79,7 @@ namespace ConciliadorDeNotas
                         DataTable prod = !ds.Tables.Contains("prod") ? null : ds.Tables["prod"];
                         DataColumnCollection prodCol = prod != null ? prod.Columns : null;
 
-                        // Importo
+                        // Imposto
                         DataTable imposto = !ds.Tables.Contains("imposto") ? null : ds.Tables["imposto"];
                         DataColumnCollection impostoCol = imposto != null ? imposto.Columns : null;
 
@@ -109,7 +109,7 @@ namespace ConciliadorDeNotas
                                 foreach (var item in cCstIcms)
                                 {
                                     DataTable icms = !ds.Tables.Contains("ICMS") ? null : ds.Tables["ICMS"];
-                                    DataColumnCollection icmsCol = imposto != null ? imposto.Columns : null;
+                                    DataColumnCollection icmsCol = icms != null ? icms.Columns : null;
 
                                     var icmsInstance = icms.AsEnumerable().Where(c => c.Field<int>("imposto_id") == impostoInstance.FirstOrDefault().Field<int>("imposto_id")).FirstOrDefault();
 
@@ -124,6 +124,39 @@ namespace ConciliadorDeNotas
                                     }
 
                                 }
+
+                                // CST PIS 
+                                DataTable pis = !ds.Tables.Contains("PIS") ? null : ds.Tables["PIS"];
+                                DataColumnCollection pisCol = pis != null ? pis.Columns : null;
+
+                                var pisInstance = pis.AsEnumerable().Where(c => c.Field<int>("imposto_id") == impostoInstance.FirstOrDefault().Field<int>("imposto_id")).FirstOrDefault();
+
+                                if(pisInstance != null)
+                                {
+                                    DataTable PisAliq = ds.Tables["PISAliq"];
+                                    DataColumnCollection PisAliqCol = PisAliq != null ? PisAliq.Columns : null;
+
+                                    var PisAliqInstance = PisAliq.AsEnumerable().Where(c => c.Field<int>("pis_id") == pisInstance.Field<int>("pis_id")).FirstOrDefault();
+
+                                    detInstance.prod.CST_PIS = PisAliqCol.Contains("CST") ? PisAliqInstance.Field<string>("CST") : "";
+                                }
+
+                                // CST COFINS 
+                                DataTable cofins = !ds.Tables.Contains("COFINS") ? null : ds.Tables["COFINS"];
+                                DataColumnCollection cofinsCol = pis != null ? pis.Columns : null;
+
+                                var confinsInstance = cofins.AsEnumerable().Where(c => c.Field<int>("imposto_id") == impostoInstance.FirstOrDefault().Field<int>("imposto_id")).FirstOrDefault();
+
+                                if (confinsInstance != null)
+                                {
+                                    DataTable CofinsAliq = ds.Tables["COFINSAliq"];
+                                    DataColumnCollection CofinsAliqCol = CofinsAliq != null ? CofinsAliq.Columns : null;
+
+                                    var CofinsAliqInstance = CofinsAliq.AsEnumerable().Where(c => c.Field<int>("cofins_id") == confinsInstance.Field<int>("cofins_id")).FirstOrDefault();
+
+                                    detInstance.prod.CST_COFINS = CofinsAliqCol.Contains("CST") ? CofinsAliqInstance.Field<string>("CST") : "";
+                                }
+
                             }
                         }
 
@@ -363,13 +396,19 @@ namespace ConciliadorDeNotas
                     produto.listaErros.Add(String.Format("CEST - Atual: {0}, Correto: {1}", produto.CEST, produtoBanco.CEST));
                 }
 
-                if (produto.CST != produtoBanco.CST)
+                if (produto.CST_PIS != produtoBanco.CST_PIS)
                 {
                     produto.STATUS = STATUS.Invalido;
-                    produto.listaErros.Add(String.Format("CST - Atual: {0}, Correto: {1}", produto.CST, produtoBanco.CST));
+                    produto.listaErros.Add(String.Format("CST_PIS - Atual: {0}, Correto: {1}", produto.CST_PIS, produtoBanco.CST_PIS));
                 }
 
-                if(produto.listaErros.Count == 0)
+                if (produto.CST_COFINS != produtoBanco.CST_COFINS)
+                {
+                    produto.STATUS = STATUS.Invalido;
+                    produto.listaErros.Add(String.Format("CST_COFINS - Atual: {0}, Correto: {1}", produto.CST_COFINS, produtoBanco.CST_COFINS));
+                }
+
+                if (produto.listaErros.Count == 0)
                 {
                     produto.STATUS = STATUS.Valido;
                 }
@@ -397,6 +436,8 @@ namespace ConciliadorDeNotas
                                 CEST = produto.CEST,
                                 CFOP = produto.CFOP,
                                 CST = produto.CST,
+                                CST_PIS = produto.CST_PIS,
+                                CST_COFINS = produto.CST_COFINS
                             });
                         }
                         else
@@ -407,9 +448,9 @@ namespace ConciliadorDeNotas
 
                     registrosSalvos += db.SaveChanges();
                     if(registrosNaoSalvos == 0)
-                        MessageBox.Show(String.Format("{0} produtos foram salvos no banco de dados e {1} já estavam salvos!", registrosSalvos, registrosNaoSalvos));
+                        MessageBox.Show(String.Format("{0} produtos(s) foram salvos no banco de dados e {1} já estavam salvos!", registrosSalvos, registrosNaoSalvos));
                     else
-                        MessageBox.Show(String.Format("{0} produtos foram salvos no banco de dados!", registrosSalvos));
+                        MessageBox.Show(String.Format("{0} produto(s) foram salvos no banco de dados!", registrosSalvos));
                 }
             }
             catch (Exception ex)
@@ -425,8 +466,11 @@ namespace ConciliadorDeNotas
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            CadastroDeProdutos cadastroDeProdutos = new CadastroDeProdutos(Content);
-            this.Content = cadastroDeProdutos;
+            //CadastroDeProdutos cadastroDeProdutos = new CadastroDeProdutos(_Content);
+            //Content = cadastroDeProdutos;
+
+            Cadastro_Produtos cad = new Cadastro_Produtos(produtosBanco);
+            cad.ShowDialog();
         }
     }
 }
