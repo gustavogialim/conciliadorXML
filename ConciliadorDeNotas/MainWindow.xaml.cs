@@ -439,6 +439,7 @@ namespace ConciliadorDeNotas
                                 CST_PIS = produto.CST_PIS,
                                 CST_COFINS = produto.CST_COFINS
                             });
+                            produtosBanco.Add(produto);
                         }
                         else
                         {
@@ -466,11 +467,15 @@ namespace ConciliadorDeNotas
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            //CadastroDeProdutos cadastroDeProdutos = new CadastroDeProdutos(_Content);
-            //Content = cadastroDeProdutos;
-
             Cadastro_Produtos cad = new Cadastro_Produtos(produtosBanco);
             cad.ShowDialog();
+
+            cad.Closed += new EventHandler(Cadastro_Produtos_Close);
+        }
+
+        private void Cadastro_Produtos_Close(object sender, EventArgs e)
+        {
+            PingBanco();
         }
     }
 }
