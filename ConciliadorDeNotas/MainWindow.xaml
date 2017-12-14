@@ -101,11 +101,13 @@
 
             <TextBlock x:Name="labelDadosResultadoAnaliseMensagem" Grid.Row="2" Foreground="Black" FontSize="36" Height="50" Text="Dados e Resultado da Análise" TextAlignment="Center" />
 
-            <Border x:Name="btnVerResultados" Grid.Row="2" BorderBrush="Black" Margin="0,207,0,0" Height="37" Background="#FF001B36" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <!--<Border x:Name="btnVerResultados" Grid.Row="2" BorderBrush="Black" Margin="0,207,0,0" Height="37" Background="#FF001B36" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <TextBlock  Foreground="White" FontSize="23" Height="30" Text="Ver Resultados" TextAlignment="Center" />
                 </StackPanel>
-            </Border>
+            </Border>-->
+
+            <Button x:Name="btnVerResultados" Cursor="Hand" Content="Ver Resultados" FontSize="23" HorizontalAlignment="Left" Margin="0,207,0,0" VerticalAlignment="Top" Width="792" Background="#FF001B36" BorderBrush="{x:Null}" Foreground="White" Height="37" Grid.Row="2" Click="btnVoltar_Click"/>
 
         </Grid>
 

@@ -2,8 +2,8 @@
 {
     public enum STATUS
     {
-        Valido,
         Invalido,
+        Valido,
         NaoConciliado
     }
 }

@@ -161,7 +161,22 @@ namespace Classes
                 /// listaErros - Lista de erros da conciliação
                 /// </summary>
                 [NotMapped]
-                public List<string> listaErros { get; set; } = new List<string>();
+                public List<Error> listaErros { get; set; } = new List<Error>();
+                /// <summary>
+                /// quantidadeErros - Quantidade de erros da conciliação
+                /// </summary>
+                [NotMapped]
+                public int quantidadeErros { get; set; } = 0;
+                /// <summary>
+                /// CorStatus - Cor do status do produto
+                /// </summary>
+                [NotMapped]
+                public string CorStatus { get; set; }
+
+                public class Error
+                {
+                    public string Message { get; set; }
+                }
             }
 
             public class Imposto

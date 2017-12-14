@@ -1,0 +1,86 @@
+﻿<Window x:Class="ConciliadorDeNotas.Resultados"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ConciliadorDeNotas"
+        mc:Ignorable="d"
+        Title="Resultados" Height="700" Width="742" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary Source="/Dicionario.xaml"/>
+    </Window.Resources>
+    
+    <Grid x:Name="gridResultados" Background="White">
+        <Border BorderBrush="Black" Margin="0,0,0,0" Height="32" Background="#FF002549" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <TextBlock  Foreground="White" FontSize="23" Height="30" Text="Resultados da Análise do XML" TextAlignment="Center" />
+            </StackPanel>
+        </Border>
+
+        <Border BorderBrush="Black" Margin="0,50,389,0" Height="32" Background="#FF48464D" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <TextBlock  Foreground="White" FontSize="23" Height="30" Text="Lista de Produtos da análise" TextAlignment="Left" Width="343" />
+            </StackPanel>
+        </Border>
+
+        <DataGrid AutoGenerateColumns="False" x:Name="dgListagem" IsReadOnly="True" FontSize="12" HorizontalAlignment="Left" Margin="0,87,0,0" VerticalAlignment="Top" Height="582" Width="724" BorderBrush="{x:Null}">
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Canvas Height="135" Width="700">
+                        <ListView HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="700" ItemsSource="{Binding listaErros}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Erros" Width="685" DisplayMemberBinding="{Binding Message}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Canvas>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="15">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Button Content="+" Padding="-10" FontSize="16" Width="15" Height="15" Click="HandleExpandCollapseForAll"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Cursor="Hand" x:Name="btExpande" Content="+" Padding="-10" FontSize="16" Width="15" Height="15" Click="HandleExpandCollapseForRow"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Cód." Width="45" Binding="{Binding cProd}" Foreground="#FF333333"/>
+                <DataGridTextColumn Header="Descrição" Width="*" Binding="{Binding xProd}" Foreground="#FF333333"/>
+                <DataGridTextColumn Header="NCM" Width="70" Binding="{Binding NCM}" Foreground="#FF333333"/>
+                <DataGridTextColumn Header="CEST" Width="50" Binding="{Binding CEST}" Foreground="#FF333333"/>
+                <DataGridTextColumn Header="CFOP" Width="50" Binding="{Binding CFOP}" Foreground="#FF333333"/>
+                <DataGridTextColumn Header="CST PIS" Width="60" Binding="{Binding CST_PIS}" Foreground="#FF333333"/>
+                <DataGridTextColumn Header="CST COFINS" Width="75" Binding="{Binding CST_COFINS}" Foreground="#FF333333"/>
+                <DataGridTextColumn Header="Qtd. Erros" Width="65" Binding="{Binding quantidadeErros}" Foreground="#FF333333"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Ellipse Width="12" Height="12" Stroke="Black" Fill="{Binding CorStatus, Converter={StaticResource ConverteToBrush}}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                <ToolTipService.ToolTip>
+                                    <ToolTip Content="Status do Pruduto."/>
+                                </ToolTipService.ToolTip>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>

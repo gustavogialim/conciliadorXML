@@ -69,7 +69,15 @@ namespace ConciliadorDeNotas
                             return;
                         }
 
-                        ds.ReadXml(fileName);
+                        try
+                        {
+                            ds.ReadXml(fileName);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("XML Inválido, selecione um xml de nota válido!\n\n" + "Execeção interna: " + ex.Message);
+                            return;
+                        }
 
                         // Det
                         DataTable det = !ds.Tables.Contains("det") ? null : ds.Tables["det"];
@@ -82,6 +90,11 @@ namespace ConciliadorDeNotas
                         // Imposto
                         DataTable imposto = !ds.Tables.Contains("imposto") ? null : ds.Tables["imposto"];
                         DataColumnCollection impostoCol = imposto != null ? imposto.Columns : null;
+
+                        if (det == null) {
+                            MessageBox.Show("XML Inválido, este xml não é uma nota ou não contém nenhum produto.");
+                            return;
+                        }
 
                         // Det JOIN Produtos
                         var detProdutos = (det == null ? null :
@@ -179,7 +192,7 @@ namespace ConciliadorDeNotas
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message + "\n Arquivo erro: " + fileName);
+                        MessageBox.Show(ex.Message + "\n Erro na leitura do XML: " + fileName);
                     }
                 }
             }
@@ -375,42 +388,70 @@ namespace ConciliadorDeNotas
                 if (produtoBanco == null)
                 {
                     produto.STATUS = STATUS.NaoConciliado;
+                    produto.CorStatus = "#FF008BFF";
+
                     continue;
                 }
 
                 if(produto.NCM != produtoBanco.NCM)
                 {
                     produto.STATUS = STATUS.Invalido;
-                    produto.listaErros.Add(String.Format("NCM - Atual: {0}, Correto: {1}", produto.NCM, produtoBanco.NCM));
+                    produto.CorStatus = "#FFDC5F5F";
+
+                    produto.listaErros.Add(new Nota.det.Prod.Error() {
+                        Message = String.Format("NCM - Atual: {0}, Correto: {1}", produto.NCM, produtoBanco.NCM)
+                    });
+                    produto.quantidadeErros++;
                 }
 
                 if (produto.CFOP != produtoBanco.CFOP)
                 {
                     produto.STATUS = STATUS.Invalido;
-                    produto.listaErros.Add(String.Format("CFOP - Atual: {0}, Correto: {1}", produto.CFOP, produtoBanco.CFOP));
+                    produto.CorStatus = "#FFDC5F5F";
+
+                    produto.listaErros.Add(new Nota.det.Prod.Error() {
+                        Message = String.Format("CFOP - Atual: {0}, Correto: {1}", produto.CFOP, produtoBanco.CFOP) }
+                    );
+                    produto.quantidadeErros++;
                 }
 
                 if (produto.CEST != produtoBanco.CEST)
                 {
                     produto.STATUS = STATUS.Invalido;
-                    produto.listaErros.Add(String.Format("CEST - Atual: {0}, Correto: {1}", produto.CEST, produtoBanco.CEST));
+                    produto.CorStatus = "#FFDC5F5F";
+
+                    produto.listaErros.Add(new Nota.det.Prod.Error() {
+                        Message = String.Format("CEST - Atual: {0}, Correto: {1}", produto.CEST, produtoBanco.CEST)
+                    });
+                    produto.quantidadeErros++;
                 }
 
                 if (produto.CST_PIS != produtoBanco.CST_PIS)
                 {
                     produto.STATUS = STATUS.Invalido;
-                    produto.listaErros.Add(String.Format("CST_PIS - Atual: {0}, Correto: {1}", produto.CST_PIS, produtoBanco.CST_PIS));
+                    produto.CorStatus = "#FFDC5F5F";
+
+                    produto.listaErros.Add(new Nota.det.Prod.Error() {
+                        Message = String.Format("CST_PIS - Atual: {0}, Correto: {1}", produto.CST_PIS, produtoBanco.CST_PIS)
+                    });
+                    produto.quantidadeErros++;
                 }
 
                 if (produto.CST_COFINS != produtoBanco.CST_COFINS)
                 {
                     produto.STATUS = STATUS.Invalido;
-                    produto.listaErros.Add(String.Format("CST_COFINS - Atual: {0}, Correto: {1}", produto.CST_COFINS, produtoBanco.CST_COFINS));
+                    produto.CorStatus = "#FFDC5F5F";
+
+                    produto.listaErros.Add(new Nota.det.Prod.Error() {
+                        Message = String.Format("CST_COFINS - Atual: {0}, Correto: {1}", produto.CST_COFINS, produtoBanco.CST_COFINS)
+                    });
+                    produto.quantidadeErros++;
                 }
 
                 if (produto.listaErros.Count == 0)
                 {
                     produto.STATUS = STATUS.Valido;
+                    produto.CorStatus = "#FF3AAE3A";
                 }
             }
         }
@@ -476,6 +517,12 @@ namespace ConciliadorDeNotas
         private void Cadastro_Produtos_Close(object sender, EventArgs e)
         {
             PingBanco();
+        }
+
+        private void btnVoltar_Click(object sender, RoutedEventArgs e)
+        {
+            Resultados result = new Resultados(produtosNota);
+            result.Show();
         }
     }
 }
