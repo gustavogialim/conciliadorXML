@@ -6,4 +6,10 @@
         Valido,
         NaoConciliado
     }
+
+    public enum IMPORTACAO
+    {
+        XML,
+        TXT
+    }
 }

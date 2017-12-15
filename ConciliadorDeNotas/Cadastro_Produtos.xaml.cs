@@ -98,6 +98,7 @@ namespace ConciliadorDeNotas
 
             txtCProd.Text = produto.cProd;
             txtXProd.Text = produto.xProd;
+            txtvProd.Text = produto.vProd;
             txtNCM.Text = produto.NCM;
             txtCEST.Text = produto.CEST;
             txtCFOP.Text = produto.CFOP;
@@ -151,6 +152,7 @@ namespace ConciliadorDeNotas
             // Validações
             if (txtCProd.Text == "" ||
                 txtXProd.Text == "" ||
+                txtvProd.Text == "" ||
                 txtNCM.Text == "" ||
                 txtCEST.Text == "" ||
                 txtCFOP.Text == "" ||
@@ -172,6 +174,7 @@ namespace ConciliadorDeNotas
                     {
                         cProd = txtCProd.Text,
                         xProd = txtXProd.Text,
+                        vProd = txtvProd.Text,
                         NCM = txtNCM.Text,
                         CEST = txtCEST.Text,
                         CFOP = txtCFOP.Text,

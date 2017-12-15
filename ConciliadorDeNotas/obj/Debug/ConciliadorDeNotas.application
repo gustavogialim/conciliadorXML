@@ -7,14 +7,14 @@
     <framework targetVersion="4.5.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="ConciliadorDeNotas.exe.manifest" size="8900">
+    <dependentAssembly dependencyType="install" codebase="ConciliadorDeNotas.exe.manifest" size="9372">
       <assemblyIdentity name="ConciliadorDeNotas.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>c6x3nA9MGaATj/hLVUwHUT7TOH9dyCQVdlU0ft92xYw=</dsig:DigestValue>
+        <dsig:DigestValue>n+75UKbPw2i6ZNkMGU9aYlVJRq7YKfKK7sCn1Ce6QHk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

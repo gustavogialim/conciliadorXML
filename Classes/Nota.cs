@@ -93,8 +93,7 @@ namespace Classes
                 /// <summary>
                 /// Valor Total Bruto dos Produtos ou Serviços
                 /// </summary>
-                [NotMapped]
-                public decimal vProd { get; set; }
+                public string vProd { get; set; }
                 /// <summary>
                 /// GTIN (Global Trade Item Number) da unidade tributável, antigo código EAN ou código de barras
                 /// </summary>

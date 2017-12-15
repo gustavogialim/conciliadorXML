@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
   <asmv1:assemblyIdentity name="ConciliadorDeNotas.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="xml.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
     <assemblyIdentity name="ConciliadorDeNotas" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
@@ -49,19 +50,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>2Ima0Xssx0NIL6tGn/XfPXz0+KApG8/g8I5sOMOHY6o=</dsig:DigestValue>
+        <dsig:DigestValue>dSVrrVqSQz46UPLG1sG+h2AD8WImJZdoAN4CH4o7inM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ConciliadorDeNotas.exe" size="96768">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ConciliadorDeNotas.exe" size="235520">
       <assemblyIdentity name="ConciliadorDeNotas" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>r/qtz1WjMInZpSxgmUzM6zlGZ9fwQLgLqlsgn5EUbVk=</dsig:DigestValue>
+        <dsig:DigestValue>3AaMHL1qhVRWKrWW84WlfW4EckmxpmcOWrVPFZr+HK4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -97,7 +98,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>0zrEpvN42JrKScB6NNqGVrfmA2/E7W3e7esf997rSXw=</dsig:DigestValue>
+        <dsig:DigestValue>Oid1GwnSyC3VEc+9c57HJV2oxACenRS5kfgSDpv19zg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -109,7 +110,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>oB3vkfs7JkoiPRznOqiZu4qr8yLsQAnDgA3G3ybaDtU=</dsig:DigestValue>
+        <dsig:DigestValue>UHoRn1rp1FWi9bCli96JWiATrI1S1eShG8vVQi1nxxk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -156,6 +157,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>i6KAXkJX+9wIaHyBgdZKhXLAASgEEDz4ttAo0m3z+b8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="xml.ico" size="67646">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>FPD17DWJrSoVpusj+5G0spJH2V3QN2fNXueUkT8Wjn0=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

@@ -37,6 +37,7 @@
         <TextBox x:Name="txtNCM" Padding="5" Foreground="Gray" FontSize="14" FontStyle="Italic" HorizontalAlignment="Left" Height="34" Margin="10,122,0,0" TextWrapping="Wrap" Text="NCM" ToolTip="NCM" VerticalAlignment="Top" Width="113" GotFocus="GotFocusTextoBox" LostFocus="LostFocusTextoBox"/>
         <TextBox x:Name="txtCEST" Padding="5" Foreground="Gray" FontSize="14" FontStyle="Italic" HorizontalAlignment="Left" Height="34" Margin="128,122,0,0" TextWrapping="Wrap" Text="CEST" ToolTip="CEST"  VerticalAlignment="Top" Width="113" GotFocus="GotFocusTextoBox" LostFocus="LostFocusTextoBox"/>
         <TextBox x:Name="txtCFOP" Padding="5" Foreground="Gray" FontSize="14" FontStyle="Italic" HorizontalAlignment="Left" Height="34" Margin="246,122,0,0" TextWrapping="Wrap" Text="CFOP" ToolTip="CFOP"  VerticalAlignment="Top" Width="113" GotFocus="GotFocusTextoBox" LostFocus="LostFocusTextoBox"/>
+        <TextBox x:Name="txtvProd" Padding="5" Foreground="Gray" FontSize="14" FontStyle="Italic" HorizontalAlignment="Left" Height="34" Margin="364,122,0,0" TextWrapping="Wrap" Text="Valor" ToolTip="Valor"  VerticalAlignment="Top" Width="113" GotFocus="GotFocusTextoBox" LostFocus="LostFocusTextoBox"/>
 
         <TextBox x:Name="txtCST" Padding="5" Foreground="Gray" FontSize="14" FontStyle="Italic" HorizontalAlignment="Left" Height="34" Margin="10,173,0,0" TextWrapping="Wrap" Text="CST ICMS" ToolTip="CST ICMS"  VerticalAlignment="Top" Width="113" GotFocus="GotFocusTextoBox" LostFocus="LostFocusTextoBox"/>
         <TextBox x:Name="txtCST_PIS" Padding="5" Foreground="Gray" FontSize="14" FontStyle="Italic" HorizontalAlignment="Left" Height="34" Margin="128,173,0,0" TextWrapping="Wrap" Text="CST PIS" ToolTip="CST PIS"  VerticalAlignment="Top" Width="113" GotFocus="GotFocusTextoBox" LostFocus="LostFocusTextoBox"/>
@@ -52,11 +53,12 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Cód." Width="45" Binding="{Binding cProd}" Foreground="#FF333333"/>
                 <DataGridTextColumn Header="Descrição" Width="*" Binding="{Binding xProd}" Foreground="#FF333333"/>
-                <DataGridTextColumn Header="NCM" Width="70" Binding="{Binding NCM}" Foreground="#FF333333"/>
+                <DataGridTextColumn Header="Valor" Width="60" Binding="{Binding vProd}" Foreground="#FF333333"/>
+                <DataGridTextColumn Header="NCM" Width="65" Binding="{Binding NCM}" Foreground="#FF333333"/>
                 <DataGridTextColumn Header="CEST" Width="50" Binding="{Binding CEST}" Foreground="#FF333333"/>
                 <DataGridTextColumn Header="CFOP" Width="50" Binding="{Binding CFOP}" Foreground="#FF333333"/>
                 <DataGridTextColumn Header="CST PIS" Width="60" Binding="{Binding CST_PIS}" Foreground="#FF333333"/>
-                <DataGridTextColumn Header="CST COFINS" Width="75" Binding="{Binding CST_COFINS}" Foreground="#FF333333"/>
+                <DataGridTextColumn Header="CST COF." Width="60" Binding="{Binding CST_COFINS}" Foreground="#FF333333"/>
                 <DataGridTemplateColumn Header="Editar" Width="45" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
