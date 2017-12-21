@@ -124,10 +124,18 @@ namespace ConciliadorDeNotas
                 string produtoDescricao = produto.xProd;
 
                 Contexto context = new Contexto();
-                context.Produto.Attach(produto);
+                //var produtoContext = context.Produto.Where(c => c.xProd == produto.xProd && c.cProd == produto.cProd).FirstOrDefault();
+                var produtoContext = context.Produto.Where(c => c.xProd == produto.xProd).FirstOrDefault();
 
-                context.Produto.Remove(produto);
-                context.Entry(produto).State = EntityState.Deleted;
+                if (produtoContext != null)
+                {
+                    context.Produto.Remove(produtoContext);
+                }
+
+                //context.Produto.Attach(produto);
+
+                //context.Produto.Remove(produto);
+                //context.Entry(produto).State = EntityState.Deleted;
 
                 context.SaveChanges();
 
@@ -168,7 +176,7 @@ namespace ConciliadorDeNotas
             {
                 using (var db = new Contexto())
                 {
-                    var produtoNoBanco = db.Produto.Where(c => c.cProd == txtCProd.Text).FirstOrDefault();
+                    var produtoNoBanco = db.Produto.Where(c => c.xProd == txtXProd.Text).FirstOrDefault();
 
                     var produtoInstance = new Nota.det.Prod()
                     {
@@ -189,7 +197,7 @@ namespace ConciliadorDeNotas
 
                         produtos.Add(produtoInstance);
                         dgListagem.ItemsSource = new List<Nota.det.Prod>();
-                        dgListagem.ItemsSource = produtos.OrderBy(c => c.xProd).ToList(); ;
+                        dgListagem.ItemsSource = produtos.OrderBy(c => c.xProd).ToList();
 
                         registrosSalvos += db.SaveChanges();
                         MessageBox.Show(String.Format("O produto {0} foi salvo no banco de dados!", txtXProd.Text));
@@ -241,7 +249,7 @@ namespace ConciliadorDeNotas
         {
             if (e.Key == Key.Enter)
             {
-                btnSalvar_Click(null, null);
+                //btnSalvar_Click(null, null);
             }
         }
     }

@@ -46,7 +46,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
-                                        <Button Content="+" Padding="-10" FontSize="16" Width="15" Height="15" Click="HandleExpandCollapseForAll"/>
+                                        <!--<Button Content="+" Padding="-10" FontSize="16" Width="15" Height="15" Click="HandleExpandCollapseForAll"/>-->
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
@@ -59,8 +59,9 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Cód." Width="45" Binding="{Binding cProd}" Foreground="#FF333333"/>
+                <DataGridTextColumn Header="Cód." Width="40" Binding="{Binding cProd}" Foreground="#FF333333"/>
                 <DataGridTextColumn Header="Descrição" Width="*" Binding="{Binding xProd}" Foreground="#FF333333"/>
+                <DataGridTextColumn Header="Valor" Width="50" Binding="{Binding vProd}" Foreground="#FF333333"/>
                 <DataGridTextColumn Header="NCM" Width="70" Binding="{Binding NCM}" Foreground="#FF333333"/>
                 <DataGridTextColumn Header="CEST" Width="50" Binding="{Binding CEST}" Foreground="#FF333333"/>
                 <DataGridTextColumn Header="CFOP" Width="50" Binding="{Binding CFOP}" Foreground="#FF333333"/>
