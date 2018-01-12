@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConciliadorDeNotas"
         mc:Ignorable="d"
-        Title="Resultados" Height="700" Width="742" WindowStartupLocation="CenterScreen">
+        Title="Resultados" Height="700" MaxHeight="700" Width="742" MaxWidth="742" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary Source="/Dicionario.xaml"/>
     </Window.Resources>
-    
+
     <Grid x:Name="gridResultados" Background="White">
         <Border BorderBrush="Black" Margin="0,0,0,0" Height="32" Background="#FF002549" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
@@ -24,7 +24,9 @@
             </StackPanel>
         </Border>
 
-        <DataGrid AutoGenerateColumns="False" x:Name="dgListagem" IsReadOnly="True" FontSize="12" HorizontalAlignment="Left" Margin="0,87,0,0" VerticalAlignment="Top" Height="582" Width="724" BorderBrush="{x:Null}">
+        <TextBlock Margin="452,60,0,0" FontSize="14" Height="25" x:Name="labelTotalValorNotas" Text="Valor total dos produtos: R$ 500,00" HorizontalAlignment="Left" VerticalAlignment="Top" Width="272"></TextBlock>
+
+        <DataGrid AutoGenerateColumns="False" x:Name="dgListagem" IsReadOnly="True" FontSize="12" HorizontalAlignment="Left" Margin="0,87,0,0" VerticalAlignment="Top" Height="582" Width="724" BorderBrush="{x:Null}" RowDetailsVisibilityMode="Collapsed">
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <Canvas Height="135" Width="700">
@@ -55,7 +57,7 @@
 
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Cursor="Hand" x:Name="btExpande" Content="+" Padding="-10" FontSize="16" Width="15" Height="15" Click="HandleExpandCollapseForRow"/>
+                            <Button Visibility="{Binding Visibility}" Cursor="Hand" x:Name="btExpande" Content="+" Padding="-10" FontSize="16" Width="15" Height="15" Click="HandleExpandCollapseForRow"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

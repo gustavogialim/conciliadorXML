@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConciliadorDeNotas"
         mc:Ignorable="d"
-        Title="Cadastro_Produtos" Height="500" Width="742" WindowStartupLocation="CenterScreen">
+        Title="Cadastro_Produtos" Height="500" Width="742" MaxWidth="742" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style x:Key="dgListagem" TargetType="DataGridCell">
@@ -45,11 +45,12 @@
 
         <Button x:Name="btnSalvar" Cursor="Hand" Content="Salvar" FontSize="20" HorizontalAlignment="Left" Margin="28,224,0,0" VerticalAlignment="Top" Width="155" Background="#FF006DDA" BorderBrush="{x:Null}" Foreground="White" Height="41" Click="btnSalvar_Click"/>
         <Button x:Name="btnLimpar" Cursor="Hand" Content="Limpar" FontSize="20" HorizontalAlignment="Left" Margin="188,224,0,0" VerticalAlignment="Top" Width="155" Background="#FF006DDA" BorderBrush="{x:Null}" Foreground="White" Height="41" Click="btnLimpar_Click"/>
-        
+
         <Border Margin="0,270,0,0" Height="1" Background="#FFBFBFBF" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
-        <TextBlock Margin="0,272,0,0" FontSize="14" Height="25" x:Name="labelPesquisa" Text="Listagem de produtos" HorizontalAlignment="Left" VerticalAlignment="Top" Width="733"></TextBlock>
-        <DataGrid AutoGenerateColumns="False" x:Name="dgListagem" IsReadOnly="True" FontSize="12" HorizontalAlignment="Left" Margin="0,298,0,0" VerticalAlignment="Top" Height="171" Width="724" BorderBrush="{x:Null}" SelectionChanged="dgListagem_SelectionChanged">
+        <TextBlock Margin="0,272,0,0" FontSize="14" Height="25" x:Name="labelPesquisa" Text="Listagem de produtos" HorizontalAlignment="Left" VerticalAlignment="Top" Width="359"></TextBlock>
+        <TextBlock Margin="563,270,0,0" FontSize="14" Height="25" x:Name="labelQuantidadeProdutos" Text="0 Produtos encontrados" HorizontalAlignment="Left" VerticalAlignment="Top" Width="171"></TextBlock>
+        <DataGrid AutoGenerateColumns="False" x:Name="dgListagem" IsReadOnly="True" FontSize="12" HorizontalAlignment="Left" Margin="0,298,0,0" VerticalAlignment="Stretch" Height="auto" Width="724" BorderBrush="{x:Null}" SelectionChanged="dgListagem_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Cód." Width="45" Binding="{Binding cProd}" Foreground="#FF333333"/>
                 <DataGridTextColumn Header="Descrição" Width="*" Binding="{Binding xProd}" Foreground="#FF333333"/>
@@ -79,7 +80,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBlock Margin="0,528,3,4" FontSize="14" Height="20" x:Name="labelQuantidadeRetornada" Text="0 registros." HorizontalAlignment="Right"></TextBlock>
         <Button x:Name="btnVoltar" Cursor="Hand" Content="Voltar" FontSize="15" HorizontalAlignment="Left" Margin="639,39,0,0" VerticalAlignment="Top" Width="93" Click="btnVoltar_Click" Background="#FF006DDA" BorderBrush="{x:Null}" Foreground="White" Height="25"/>
 
     </Grid>

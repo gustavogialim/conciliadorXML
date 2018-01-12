@@ -46,6 +46,8 @@ namespace ConciliadorDeNotas
             dgListagem.ItemsSource = produtos.OrderBy(c => c.xProd).ToList().ToList();
 
             dgListagem.SelectedItem = ((List<Nota.det.Prod>)dgListagem.ItemsSource).FirstOrDefault();
+
+            labelQuantidadeProdutos.Text = produtos.Count.ToString() + " produtos encontrados.";
         }
 
         private void btnVoltar_Click(object sender, RoutedEventArgs e)
@@ -56,7 +58,7 @@ namespace ConciliadorDeNotas
         private void GotFocusTextoBox(object sender, RoutedEventArgs e)
         {
             var textBox = sender as TextBox;
-            textoTextBoxAtual = textBox.Text;
+            textoTextBoxAtual = textBox.ToolTip.ToString();
 
             if (!string.IsNullOrEmpty(textBox.Text) && textBox.FontStyle == FontStyles.Italic)
             {
@@ -99,20 +101,23 @@ namespace ConciliadorDeNotas
             txtCProd.Text = produto.cProd;
             txtXProd.Text = produto.xProd;
             txtvProd.Text = produto.vProd;
-            txtNCM.Text = produto.NCM;
-            txtCEST.Text = produto.CEST;
-            txtCFOP.Text = produto.CFOP;
-            txtCST.Text = produto.CST;
-            txtCST_PIS.Text = produto.CST_PIS;
-            txtCST_COFINS.Text = produto.CST_COFINS;
+            txtNCM.Text = string.IsNullOrEmpty(produto.NCM) ? txtNCM.ToolTip.ToString(): produto.NCM;
+            txtCEST.Text = string.IsNullOrEmpty(produto.NCM) ? txtCEST.ToolTip.ToString() : produto.CEST;
+            txtCFOP.Text = string.IsNullOrEmpty(produto.NCM) ? txtCFOP.ToolTip.ToString() : produto.CFOP;
+            txtCST.Text = string.IsNullOrEmpty(produto.NCM) ? txtCST.ToolTip.ToString() : produto.CST;
+            txtCST_PIS.Text = string.IsNullOrEmpty(produto.NCM) ? txtCST_PIS.ToolTip.ToString() : produto.CST_PIS;
+            txtCST_COFINS.Text = string.IsNullOrEmpty(produto.NCM) ? txtCST_COFINS.ToolTip.ToString() : produto.CST_COFINS;
 
             foreach (object control in gridCadastroProdutos.Children)
             {
                 if (control is TextBox)
                 {
                     var textBox = control as TextBox;
-                    textBox.Foreground = new SolidColorBrush(Colors.Black);
-                    textBox.FontStyle = FontStyles.Normal;
+                    if (textBox.Text != textBox.ToolTip.ToString())
+                    {
+                        textBox.Foreground = new SolidColorBrush(Colors.Black);
+                        textBox.FontStyle = FontStyles.Normal;
+                    }
                 }
             }
         }
@@ -158,15 +163,16 @@ namespace ConciliadorDeNotas
             int registrosSalvos = 0;
 
             // Validações
-            if (txtCProd.Text == "" ||
-                txtXProd.Text == "" ||
-                txtvProd.Text == "" ||
-                txtNCM.Text == "" ||
-                txtCEST.Text == "" ||
-                txtCFOP.Text == "" ||
-                txtCST.Text == "" ||
-                txtCST_PIS.Text == "" ||
-                txtCST_COFINS.Text == "")
+            if (txtCProd.Text == "" || txtCProd.Text == txtCProd.ToolTip.ToString() ||
+                txtXProd.Text == "" || txtXProd.Text == txtXProd.ToolTip.ToString() ||
+                txtvProd.Text == "" || txtvProd.Text == txtvProd.ToolTip.ToString() ||
+                txtNCM.Text == "" || txtNCM.Text == txtNCM.ToolTip.ToString() ||
+                txtCEST.Text == "" || txtCEST.Text == txtCEST.ToolTip.ToString() ||
+                txtCFOP.Text == "" || txtCFOP.Text == txtCFOP.ToolTip.ToString() ||
+                txtCST.Text == "" || txtCST.Text == txtCST.ToolTip.ToString() ||
+                txtCST_PIS.Text == "" || txtCST_PIS.Text == txtCST_PIS.ToolTip.ToString() ||
+                txtCST_COFINS.Text == "" || txtCST_COFINS.Text == txtCST_COFINS.ToolTip.ToString()
+                    )
             {
                 MessageBox.Show("Todos os campos são obrigatórios");
                 return;

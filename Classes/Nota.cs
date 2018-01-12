@@ -1,7 +1,9 @@
 ﻿using Enums;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Windows;
 
 namespace Classes
 {
@@ -21,7 +23,7 @@ namespace Classes
             }
 
             [Table(name: "produtos")]
-            public class Prod
+            public class Prod : INotifyPropertyChanged
             {
                 [Key]
                 public int Id { get; set; }
@@ -171,6 +173,34 @@ namespace Classes
                 /// </summary>
                 [NotMapped]
                 public string CorStatus { get; set; }
+
+                [NotMapped]
+                private Visibility visibility;
+
+                [NotMapped]
+                public Visibility Visibility
+                {
+                    get
+                    {
+                        return visibility;
+                    }
+                    set
+                    {
+                        visibility = value;
+
+                        OnPropertyChanged("Visibility");
+                    }
+                }
+
+                private void OnPropertyChanged(string info)
+                {
+                    if (PropertyChanged != null)
+                    {
+                        PropertyChanged(this, new PropertyChangedEventArgs(info));
+                    }
+                }
+
+                public event PropertyChangedEventHandler PropertyChanged;
 
                 public class Error
                 {

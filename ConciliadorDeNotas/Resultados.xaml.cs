@@ -24,6 +24,7 @@ namespace ConciliadorDeNotas
         #region Variáveis
 
         List<Nota.det.Prod> produtos = new List<Nota.det.Prod>();
+        decimal totalProdutosNota = 0;
         
         #endregion
 
@@ -34,6 +35,9 @@ namespace ConciliadorDeNotas
             produtos = _produtos;
 
             dgListagem.ItemsSource = produtos.OrderBy(c => c.STATUS).ToList();
+
+            totalProdutosNota = produtos.Sum(c => decimal.Parse(c.vProd.Replace(".",",")));
+            labelTotalValorNotas.Text = "Valor total dos produtos: R$ " + totalProdutosNota.ToString("#,###,##0.00");
         }
 
         private void HandleExpandCollapseForAll(object sender, RoutedEventArgs e)

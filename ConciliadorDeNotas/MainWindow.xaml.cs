@@ -48,6 +48,11 @@ namespace ConciliadorDeNotas
         string xmlsComErro = "";
         int countFilesComErro = 0;
 
+        string fileNameTxt = "";
+        string fileExtensionTxt = "";
+        List<string> filesTxt = new List<string>();
+        int countFilesComErroTxt = 0;
+
         Thread threadPrincipal;
 
         #endregion
@@ -66,6 +71,8 @@ namespace ConciliadorDeNotas
         {
             importacao = IMPORTACAO.XML;
             produtosNota.Clear();
+            files.Clear();
+            countFilesComErro = 0;
             ds = new DataSet();
 
             fileDialog.Multiselect = false;
@@ -98,7 +105,8 @@ namespace ConciliadorDeNotas
                             }
                             Directory.CreateDirectory(temp);
 
-                            if (File.Exists(fileName)){
+                            if (File.Exists(fileName))
+                            {
                                 using (ZipFile zip = new ZipFile(fileName))
                                 {
                                     if (Directory.Exists(temp))
@@ -112,8 +120,9 @@ namespace ConciliadorDeNotas
                                                 files.Add(temp + "\\" + entri);
                                             }
                                         }
-                                        catch(Exception ex) {
-                                            MessageBox.Show("Erro ao extrar ZIP: " + ex.Message);
+                                        catch (Exception ex)
+                                        {
+                                            MessageBox.Show("Erro ao extrair ZIP: " + ex.Message);
                                             Directory.Delete(temp, true);
                                             return;
                                         }
@@ -132,15 +141,19 @@ namespace ConciliadorDeNotas
                                 Directory.Delete(temp, true);
                                 return;
                             }
-                        }else
+                        }
+                        else
                         {
                             files.Add(fileName);
                         }
 
                         // Zera ProgressBar
+                        labelDadosResultadoAnaliseMensagem.Text = "Carregando..";
+
                         progress.Value = 0;
                         progress.Maximum = files.Count;
                         progress.Visibility = Visibility.Visible;
+                        labelProgress.Visibility = Visibility.Visible;
 
                         threadPrincipal = new Thread(ProcessaXML);
                         threadPrincipal.Start();
@@ -153,7 +166,7 @@ namespace ConciliadorDeNotas
                         {
                             Directory.Delete(temp, true);
                         }
-                        catch{ }
+                        catch { }
 
                     }
                 }
@@ -170,6 +183,19 @@ namespace ConciliadorDeNotas
         {
             foreach (var file in files)
             {
+                string Extension = file.Substring(file.Length - 4, 4);
+                if (Extension != ".xml")
+                {
+                    countFilesComErro++;
+
+                    this.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        progress.Value++;
+                        labelProgress.Text = progress.Value + "/" + progress.Maximum;
+                    }));
+                    continue;
+                }
+
                 try
                 {
                     //ds.ReadXml(fileName);
@@ -346,8 +372,11 @@ namespace ConciliadorDeNotas
                     }
                 }
             }
-
-            Directory.Delete(temp, true);
+            try
+            {
+                Directory.Delete(temp, true);
+            }
+            catch { }
 
             PingBanco();
             ConciliarProdutos();
@@ -377,84 +406,158 @@ namespace ConciliadorDeNotas
         private void btnTXT_Click(object sender, RoutedEventArgs e)
         {
             importacao = IMPORTACAO.TXT;
+            produtosTxt.Clear();
+            filesTxt.Clear();
+            linhasTXT.Clear();
+            countFilesComErroTxt = 0;
 
             fileDialog.Multiselect = false;
             fileDialog.Filter = "Todos Arquivos (*.*)|*.*";
-            string fileName = "";
             if (fileDialog.ShowDialog() == true)
             {
                 try
                 {
-                    fileName = fileDialog.FileName;
-                    if (fileName.Substring(fileName.Length - 4, 4).Contains(".F"))
+                    fileNameTxt = fileDialog.FileName;
+                    fileExtensionTxt = fileNameTxt.Substring(fileNameTxt.Length - 4, 4);
+
+                    if (fileExtensionTxt.Contains("F") && fileExtensionTxt != ".zip")
                     {
                         MessageBox.Show("Selecione um arquivo válido.");
                         return;
                     }
 
-                    try
+                    #region ZIP
+                    if (fileExtensionTxt == ".zip")
                     {
-                        Stream file = fileDialog.OpenFile();
-                        StreamReader fileReader = new StreamReader(file);
+                        temp = System.IO.Path.GetTempPath();
+                        temp = temp + "zipTXT";
 
-                        while (fileReader.EndOfStream == false)
+                        if (Directory.Exists(temp))
                         {
-                            linhasTXT.Add(fileReader.ReadLine());
+                            Directory.Delete(temp, true);
                         }
+                        Directory.CreateDirectory(temp);
 
-                        linhasTXT = linhasTXT.Where(c => c.Contains("E15")).ToList();
-
-                        produtosTxt.Clear();
-
-                        foreach (var linha in linhasTXT)
+                        if (File.Exists(fileNameTxt))
                         {
-                            string cProd = linha.Substring(61, 14).Trim(' ').ToString();
-                            string xProd = linha.Substring(75, 100).TrimEnd(' ').ToString();
-                            string vProd = linha.Substring(185, 8).Trim(' ').ToString();
-
-                            vProd = vProd.Substring(0, 6).TrimStart('0') + "." + vProd.Substring(6,2);
-
-                            var produtoInstance = new Nota.det.Prod()
+                            using (ZipFile zip = new ZipFile(fileNameTxt))
                             {
-                                cProd = cProd,
-                                xProd = xProd,
-                                vProd = vProd,
-                                STATUS = STATUS.Valido
-                            };
-                            var produtoExiste = produtosTxt.Where(c => c.cProd == produtoInstance.cProd && c.xProd == produtoInstance.xProd && c.vProd == produtoInstance.vProd);
-                            if (produtoExiste.Count() == 0)
-                                produtosTxt.Add(produtoInstance);
+                                if (Directory.Exists(temp))
+                                {
+                                    try
+                                    {
+                                        zip.ExtractAll(temp);
+
+                                        foreach (var entri in zip.EntryFileNames)
+                                        {
+                                            filesTxt.Add(temp + "\\" + entri);
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        MessageBox.Show("Erro ao extrair ZIP do TXT: " + ex.Message);
+                                        Directory.Delete(temp, true);
+                                        return;
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("O diretório destino não foi criado, contato o suporte.");
+                                    Directory.Delete(temp, true);
+                                    return;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("O Arquivo ZIP não foi encontrado.");
+                            Directory.Delete(temp, true);
+                            return;
                         }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show("Arquivo Inválido, selecione um arquivo válido!\n\n" + "Execeção interna: " + ex.Message);
-                        return;
+                        filesTxt.Add(fileNameTxt);
                     }
+                    #endregion
+
+                    // Zera ProgressBar
+                    labelDadosResultadoAnaliseMensagem.Text = "Carregando..";
+
+                    progress.Value = 0;
+                    progress.Maximum = filesTxt.Count;
+                    progress.Visibility = Visibility.Visible;
+                    labelProgress.Visibility = Visibility.Visible;
+
+                    threadPrincipal = new Thread(ProcessaTXT);
+                    threadPrincipal.Start();
+
+                    #region TXT Unique
+                    //try
+                    //{
+                    //    Stream file = fileDialog.OpenFile();
+                    //    StreamReader fileReader = new StreamReader(file);
+
+                    //    while (fileReader.EndOfStream == false)
+                    //    {
+                    //        linhasTXT.Add(fileReader.ReadLine());
+                    //    }
+
+                    //    linhasTXT = linhasTXT.Where(c => c.Contains("E15")).ToList();
+
+                    //    produtosTxt.Clear();
+
+                    //    foreach (var linha in linhasTXT)
+                    //    {
+                    //        string cProd = linha.Substring(61, 14).Trim(' ').ToString();
+                    //        string xProd = linha.Substring(75, 100).TrimEnd(' ').ToString();
+                    //        string vProd = linha.Substring(185, 8).Trim(' ').ToString();
+
+                    //        vProd = vProd.Substring(0, 6).TrimStart('0') + "." + vProd.Substring(6, 2);
+
+                    //        var produtoInstance = new Nota.det.Prod()
+                    //        {
+                    //            cProd = cProd,
+                    //            xProd = xProd,
+                    //            vProd = vProd,
+                    //            STATUS = STATUS.Valido
+                    //        };
+                    //        var produtoExiste = produtosTxt.Where(c => c.xProd == produtoInstance.xProd); //c.cProd == produtoInstance.cProd && c.vProd == produtoInstance.vProd
+                    //        if (produtoExiste.Count() == 0)
+                    //            produtosTxt.Add(produtoInstance);
+                    //    }
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    //MessageBox.Show("Arquivo Inválido, selecione um arquivo válido!\n\n" + "Execeção interna: " + ex.Message);
+                    //    //return;
+                    //    countFilesComErroTxt++;
+                    //}
 
 
-                    // Insere Dados
-                    //labelCliente.Text = String.Format("Cliente: {0}", GetValueXml("emit", "xNome", ds));
-                    //labelCNPJ.Text = String.Format("CNPJ: {0}", GetValueXml("emit", "CNPJ", ds));
-                    //labelDataEmissao.Text = String.Format("Cliente: {0}", DateTime.Parse(GetValueXml("ide", "dhEmi", ds)));
-                    labelProdutos.Text = String.Format("Produtos Encontrados: {0}", produtosTxt.Count);
-                    labelProdutos.Visibility = Visibility.Visible;
+                    //// Insere Dados
+                    ////labelCliente.Text = String.Format("Cliente: {0}", GetValueXml("emit", "xNome", ds));
+                    ////labelCNPJ.Text = String.Format("CNPJ: {0}", GetValueXml("emit", "CNPJ", ds));
+                    ////labelDataEmissao.Text = String.Format("Cliente: {0}", DateTime.Parse(GetValueXml("ide", "dhEmi", ds)));
+                    //labelProdutos.Text = String.Format("Produtos Encontrados: {0}", produtosTxt.Count);
+                    //labelProdutos.Visibility = Visibility.Visible;
 
-                    //labelProdutosNaoConciliados.Text = String.Format("{0} produtos não conciliados.", produtosNota.Where(c => c.STATUS == STATUS.NaoConciliado).Count());
-                    labelProdutosValidos.Text = String.Format("{0} produtos encontrados.", produtosTxt.Count);
-                    labelProdutosValidos.Visibility = Visibility.Visible;
-                    elipseProdutosValidos.Visibility = Visibility.Visible;
+                    ////labelProdutosNaoConciliados.Text = String.Format("{0} produtos não conciliados.", produtosNota.Where(c => c.STATUS == STATUS.NaoConciliado).Count());
+                    //labelProdutosValidos.Text = String.Format("{0} produtos encontrados.", produtosTxt.Count);
+                    //labelProdutosValidos.Visibility = Visibility.Visible;
+                    //elipseProdutosValidos.Visibility = Visibility.Visible;
 
-                    groupBoxDados.Visibility = Visibility.Visible;
-                    labelAnaliseFinalizada.Visibility = Visibility.Visible;
-                    btnSalvarProdutos.Visibility = Visibility.Visible;
-                    labelDadosResultadoAnaliseMensagem.Visibility = Visibility.Collapsed;
+                    //groupBoxDados.Visibility = Visibility.Visible;
+                    //labelAnaliseFinalizada.Visibility = Visibility.Visible;
+                    //btnSalvarProdutos.Visibility = Visibility.Visible;
+                    //labelDadosResultadoAnaliseMensagem.Visibility = Visibility.Collapsed;
 
-                    btnVerResultados.Visibility = Visibility.Visible;
+                    //btnVerResultados.Visibility = Visibility.Visible;
                     //labelProdutosInvalidos.Text = String.Format("{0} produtos Inválidos.", produtosNota.Where(c => c.STATUS == STATUS.Invalido).Count());
 
                     // Exibe Dados
                     //ExibeComponentsDados(true);
+                    #endregion
 
                 }
                 catch (Exception ex)
@@ -462,7 +565,120 @@ namespace ConciliadorDeNotas
                     MessageBox.Show(ex.Message + "\n Erro na leitura do arquivo: " + fileName);
                 }
             }
-         }
+        }
+
+        private void ProcessaTXT()
+        {
+            #region Processa Arquivos TXT
+
+            foreach (var file in filesTxt)
+            {
+                try
+                {
+                    string Extension = file.Substring(file.Length - 4, 4);
+                    if (!Extension.Contains("F"))
+                    {
+                        countFilesComErroTxt++;
+
+                        this.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            progress.Value++;
+                            labelProgress.Text = progress.Value + "/" + progress.Maximum;
+                        }));
+                        continue;
+                    }
+
+                    Stream fileStream = File.Open(file, FileMode.Open);
+                    StreamReader fileReader = new StreamReader(fileStream);
+
+                    this.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        progress.Value++;
+                        labelProgress.Text = progress.Value + "/" + progress.Maximum;
+                    }));
+
+                    while (fileReader.EndOfStream == false)
+                    {
+                        linhasTXT.Add(fileReader.ReadLine());
+                    }
+
+                    // Fecha arquivo
+                    fileStream.Dispose();
+
+                    linhasTXT = linhasTXT.Where(c => c.Contains("E15")).ToList();
+
+                    produtosTxt.Clear();
+
+                    foreach (var linha in linhasTXT)
+                    {
+                        string cProd = linha.Substring(61, 14).Trim(' ').ToString();
+                        string xProd = linha.Substring(75, 100).TrimEnd(' ').ToString();
+                        string vProd = linha.Substring(185, 8).Trim(' ').ToString();
+
+                        vProd = vProd.Substring(0, 6).TrimStart('0') + "." + vProd.Substring(6, 2);
+
+                        decimal vProdDecimal = decimal.Parse(vProd.Replace(".", ","));
+
+                        var produtoInstance = new Nota.det.Prod()
+                        {
+                            cProd = cProd,
+                            xProd = xProd,
+                            vProd = vProdDecimal.ToString("#,###,##0.00"),
+                            STATUS = STATUS.Valido,
+                            CorStatus = "#FF3AAE3A",
+                            Visibility = Visibility.Collapsed
+                    };
+                        var produtoExiste = produtosTxt.Where(c => c.xProd == produtoInstance.xProd); //c.cProd == produtoInstance.cProd && c.vProd == produtoInstance.vProd
+                        if (produtoExiste.Count() == 0)
+                            produtosTxt.Add(produtoInstance);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show("Arquivo Inválido, selecione um arquivo válido!\n\n" + "Execeção interna: " + ex.Message);
+                    //return;
+                    countFilesComErroTxt++;
+                }
+            }
+
+            try
+            {
+                Directory.Delete(temp, true);
+            }
+            catch { }
+
+
+            // Insere Dados
+            this.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                labelCliente.Text = String.Format("Arquivos encontradas: {0}", filesTxt.Count);
+                labelCNPJ.Text = String.Format("Arquivos inválidos: {0}", countFilesComErroTxt);
+                labelDataEmissao.Text = String.Format("Arquivos válidos: {0}", filesTxt.Count - countFilesComErroTxt);
+                labelProdutos.Text = String.Format("Produtos Encontrados: {0}", produtosTxt.Count);
+
+                labelCliente.Visibility = Visibility.Visible;
+                labelCNPJ.Visibility = Visibility.Visible;
+                labelDataEmissao.Visibility = Visibility.Visible;
+                labelProdutos.Visibility = Visibility.Visible;
+
+                //labelProdutosNaoConciliados.Text = String.Format("{0} produtos não conciliados.", produtosNota.Where(c => c.STATUS == STATUS.NaoConciliado).Count());
+                labelProdutosValidos.Text = String.Format("{0} produtos encontrados.", produtosTxt.Count);
+                labelProdutosValidos.Visibility = Visibility.Visible;
+                elipseProdutosValidos.Visibility = Visibility.Visible;
+
+                groupBoxDados.Visibility = Visibility.Visible;
+                labelAnaliseFinalizada.Visibility = Visibility.Visible;
+                btnSalvarProdutos.Visibility = Visibility.Visible;
+                labelDadosResultadoAnaliseMensagem.Visibility = Visibility.Collapsed;
+
+                btnVerResultados.Visibility = Visibility.Visible;
+            }));
+            //labelProdutosInvalidos.Text = String.Format("{0} produtos Inválidos.", produtosNota.Where(c => c.STATUS == STATUS.Invalido).Count());
+
+            // Exibe Dados
+            //ExibeComponentsDados(true);
+            #endregion
+        }
 
         private List<Nota.det.Prod> ProdutoXmlToObject(IEnumerable<DataRow> produtos)
         {
@@ -577,9 +793,11 @@ namespace ConciliadorDeNotas
                 btnVerResultados.Visibility = Visibility.Visible;
                 btnSalvarProdutos.Visibility = Visibility.Visible;
 
+                labelProgress.Visibility = Visibility.Visible;
                 progress.Visibility = Visibility.Visible;
             }
-            else {
+            else
+            {
                 groupBoxDados.Visibility = Visibility.Collapsed;
                 labelCliente.Visibility = Visibility.Collapsed;
                 labelCNPJ.Visibility = Visibility.Collapsed;
@@ -600,9 +818,10 @@ namespace ConciliadorDeNotas
                 btnVerResultados.Visibility = Visibility.Collapsed;
                 btnSalvarProdutos.Visibility = Visibility.Collapsed;
 
+                labelProgress.Visibility = Visibility.Collapsed;
                 progress.Visibility = Visibility.Collapsed;
             }
-            
+
         }
 
         private void PingBanco()
@@ -649,17 +868,20 @@ namespace ConciliadorDeNotas
                 {
                     produto.STATUS = STATUS.NaoConciliado;
                     produto.CorStatus = "#FF008BFF";
+                    produto.Visibility = Visibility.Collapsed;
 
                     continue;
                 }
 
-                if(produto.NCM != produtoBanco.NCM)
+                if (produto.NCM != produtoBanco.NCM)
                 {
                     produto.STATUS = STATUS.Invalido;
                     produto.CorStatus = "#FFDC5F5F";
+                    produto.Visibility = Visibility.Visible;
 
-                    produto.listaErros.Add(new Nota.det.Prod.Error() {
-                        Message = String.Format("NCM - XML: {0}, Banco: {1}", 
+                    produto.listaErros.Add(new Nota.det.Prod.Error()
+                    {
+                        Message = String.Format("NCM - XML: {0}, Banco: {1}",
                             string.IsNullOrEmpty(produto.NCM) ? "Vazio" : produto.NCM,
                             string.IsNullOrEmpty(produtoBanco.NCM) ? "Vazio" : produtoBanco.NCM)
                     });
@@ -670,9 +892,11 @@ namespace ConciliadorDeNotas
                 {
                     produto.STATUS = STATUS.Invalido;
                     produto.CorStatus = "#FFDC5F5F";
+                    produto.Visibility = Visibility.Visible;
 
-                    produto.listaErros.Add(new Nota.det.Prod.Error() {
-                        Message = String.Format("CFOP - XML: {0}, Banco: {1}", 
+                    produto.listaErros.Add(new Nota.det.Prod.Error()
+                    {
+                        Message = String.Format("CFOP - XML: {0}, Banco: {1}",
                             string.IsNullOrEmpty(produto.CFOP) ? "Vazio" : produto.CFOP,
                             string.IsNullOrEmpty(produtoBanco.CFOP) ? "Vazio" : produtoBanco.CFOP)
                     });
@@ -683,9 +907,11 @@ namespace ConciliadorDeNotas
                 {
                     produto.STATUS = STATUS.Invalido;
                     produto.CorStatus = "#FFDC5F5F";
+                    produto.Visibility = Visibility.Visible;
 
-                    produto.listaErros.Add(new Nota.det.Prod.Error() {
-                        Message = String.Format("CEST - XML: {0}, Banco: {1}", 
+                    produto.listaErros.Add(new Nota.det.Prod.Error()
+                    {
+                        Message = String.Format("CEST - XML: {0}, Banco: {1}",
                             string.IsNullOrEmpty(produto.CEST) ? "Vazio" : produto.CEST,
                              string.IsNullOrEmpty(produtoBanco.CEST) ? "Vazio" : produtoBanco.CEST)
                     });
@@ -696,9 +922,11 @@ namespace ConciliadorDeNotas
                 {
                     produto.STATUS = STATUS.Invalido;
                     produto.CorStatus = "#FFDC5F5F";
+                    produto.Visibility = Visibility.Visible;
 
-                    produto.listaErros.Add(new Nota.det.Prod.Error() {
-                        Message = String.Format("CST_PIS - XML: {0}, Banco: {1}", 
+                    produto.listaErros.Add(new Nota.det.Prod.Error()
+                    {
+                        Message = String.Format("CST_PIS - XML: {0}, Banco: {1}",
                             string.IsNullOrEmpty(produto.CST_PIS) ? "Vazio" : produto.CST_PIS,
                             string.IsNullOrEmpty(produtoBanco.CST_PIS) ? "Vazio" : produtoBanco.CST_PIS)
                     });
@@ -709,9 +937,11 @@ namespace ConciliadorDeNotas
                 {
                     produto.STATUS = STATUS.Invalido;
                     produto.CorStatus = "#FFDC5F5F";
+                    produto.Visibility = Visibility.Visible;
 
-                    produto.listaErros.Add(new Nota.det.Prod.Error() {
-                        Message = String.Format("CST_COFINS - XML: {0}, Banco: {1}", 
+                    produto.listaErros.Add(new Nota.det.Prod.Error()
+                    {
+                        Message = String.Format("CST_COFINS - XML: {0}, Banco: {1}",
                             string.IsNullOrEmpty(produto.CST_COFINS) ? "Vazio" : produto.CST_COFINS,
                             string.IsNullOrEmpty(produtoBanco.CST_COFINS) ? "Vazio" : produtoBanco.CST_COFINS)
                     });
@@ -722,6 +952,7 @@ namespace ConciliadorDeNotas
                 {
                     produto.STATUS = STATUS.Valido;
                     produto.CorStatus = "#FF3AAE3A";
+                    produto.Visibility = Visibility.Collapsed;
                 }
             }
         }
@@ -740,7 +971,8 @@ namespace ConciliadorDeNotas
                     {
                         var produtoNoBanco = db.Produto.Where(c => c.xProd == produto.xProd).FirstOrDefault();
 
-                        if(produtoNoBanco == null) {
+                        if (produtoNoBanco == null)
+                        {
                             db.Produto.Add(new Nota.det.Prod()
                             {
                                 cProd = produto.cProd,
@@ -762,7 +994,7 @@ namespace ConciliadorDeNotas
                     }
 
                     registrosSalvos += db.SaveChanges();
-                    if(registrosNaoSalvos != 0)
+                    if (registrosNaoSalvos != 0)
                         MessageBox.Show(String.Format("{0} produtos(s) foram salvos no banco de dados e {1} já estavam salvos!", registrosSalvos, registrosNaoSalvos));
                     else
                         MessageBox.Show(String.Format("{0} produto(s) foram salvos no banco de dados!", registrosSalvos));
