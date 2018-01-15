@@ -624,8 +624,8 @@ namespace ConciliadorDeNotas
                             cProd = cProd,
                             xProd = xProd,
                             vProd = vProdDecimal.ToString("#,###,##0.00"),
-                            STATUS = STATUS.Valido,
-                            CorStatus = "#FF3AAE3A",
+                            STATUS = STATUS.NaoConciliado,
+                            CorStatus = "#FF008BFF",
                             Visibility = Visibility.Collapsed
                     };
                         var produtoExiste = produtosTxt.Where(c => c.xProd == produtoInstance.xProd); //c.cProd == produtoInstance.cProd && c.vProd == produtoInstance.vProd
@@ -662,9 +662,17 @@ namespace ConciliadorDeNotas
                 labelProdutos.Visibility = Visibility.Visible;
 
                 //labelProdutosNaoConciliados.Text = String.Format("{0} produtos não conciliados.", produtosNota.Where(c => c.STATUS == STATUS.NaoConciliado).Count());
-                labelProdutosValidos.Text = String.Format("{0} produtos encontrados.", produtosTxt.Count);
-                labelProdutosValidos.Visibility = Visibility.Visible;
-                elipseProdutosValidos.Visibility = Visibility.Visible;
+                labelProdutosNaoConciliados.Text = String.Format("{0} produtos não conciliados.", produtosTxt.Count);
+                labelProdutosNaoConciliados.Visibility = Visibility.Visible;
+                elipseProdutosNaoConciliados.Visibility = Visibility.Visible;
+
+                labelProdutosValidos.Text = String.Format("{0} produtos encontrados.", 0);
+                labelProdutosValidos.Visibility = Visibility.Collapsed;
+                elipseProdutosValidos.Visibility = Visibility.Collapsed;
+
+                labelProdutosInvalidos.Text = String.Format("{0} produtos Inválidos.", 0);
+                labelProdutosInvalidos.Visibility = Visibility.Collapsed;
+                elipseProdutosInvalidos.Visibility = Visibility.Collapsed;
 
                 groupBoxDados.Visibility = Visibility.Visible;
                 labelAnaliseFinalizada.Visibility = Visibility.Visible;

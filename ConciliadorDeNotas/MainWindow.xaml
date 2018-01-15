@@ -86,13 +86,13 @@
                 </StackPanel>
             </GroupBox>
 
-            <Button x:Name="btnSalvarProdutos" Cursor="Hand" Grid.Row="2" Width="190" Height="25" FontSize="14" Margin="10,179,592,66" FontWeight="Bold" Background="#FFF3F3F3" BorderThickness="0" Click="btnSalvarProdutos_Click">Salvar produtos</Button>
+            <Button x:Name="btnSalvarProdutos" Cursor="Hand" Grid.Row="2" Width="190" Height="25" FontSize="14" Margin="10,179,592,66" FontWeight="Bold" Background="#FFDEDEDE" BorderThickness="0" Click="btnSalvarProdutos_Click">Salvar produtos</Button>
 
             <Canvas Grid.Row="2">
                 <TextBlock x:Name="labelAnaliseFinalizada" Grid.Row="2" Foreground="#FF0FAA00" Visibility="Visible" FontWeight="Normal" Text="Análise finalizada." FontSize="14" Width="114" Height="17" Canvas.Left="668" Canvas.Top="243"/>
 
-                <Ellipse x:Name="elipseProdutosNaoConciliados" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FF3D9EFF" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="260" Canvas.Top="187"  />
-                <TextBlock x:Name="labelProdutosNaoConciliados" Grid.Row="2" Visibility="Visible" FontWeight="Normal" Text="0 Produtos não conciliados." FontSize="12" Width="152" Height="17" Canvas.Left="275" Canvas.Top="184"/>
+                <Ellipse x:Name="elipseProdutosNaoConciliados" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FF3D9EFF" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="240" Canvas.Top="187"  />
+                <TextBlock x:Name="labelProdutosNaoConciliados" Grid.Row="2" Visibility="Visible" FontWeight="Normal" Text="0 Produtos não conciliados." FontSize="12" Width="170" Height="17" Canvas.Left="257" Canvas.Top="184"/>
                 <Ellipse x:Name="elipseProdutosValidos" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FF3AAE3A" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="441" Canvas.Top="187"  />
                 <TextBlock x:Name="labelProdutosValidos" Grid.Row="2" Visibility="Visible" FontWeight="Normal" Text="0 Produtos Válidos." FontSize="12" Width="144" Height="17" Canvas.Left="460" Canvas.Top="184"/>
                 <Ellipse x:Name="elipseProdutosInvalidos" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FFDC5F5F" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="609" Canvas.Top="187" />
