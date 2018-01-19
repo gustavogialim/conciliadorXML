@@ -40,6 +40,7 @@ namespace ConciliadorDeNotas
         string[] cCstIcms = { "ICMS00", "ICMS10", "ICMS20", "ICMS30", "ICMS40", "ICMS51", "ICMS60", "ICMS70", "ICMS90", "ICMSSN101", "ICMSSN102", "ICMSSN201", "ICMSSN202", "ICMSSN500", "ICMSSN900" };
         List<string> linhasTXT = new List<string>();
         IMPORTACAO importacao = IMPORTACAO.XML;
+        WindowState windowStateParent = WindowState.Normal;
 
         string fileName = "";
         string fileExtension = "";
@@ -1023,6 +1024,7 @@ namespace ConciliadorDeNotas
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
             Cadastro_Produtos cad = new Cadastro_Produtos(produtosBanco);
+            cad.WindowState = windowStateParent;
             cad.ShowDialog();
 
             cad.Closed += new EventHandler(Cadastro_Produtos_Close);
@@ -1038,12 +1040,18 @@ namespace ConciliadorDeNotas
             var produtosASeremExibidos = importacao == IMPORTACAO.XML ? produtosNota : produtosTxt;
 
             Resultados result = new Resultados(produtosASeremExibidos);
+            result.WindowState = windowStateParent;
             result.Show();
         }
 
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
         {
             btnTXT_Click(null, null);
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            windowStateParent = this.WindowState;
         }
     }
 }

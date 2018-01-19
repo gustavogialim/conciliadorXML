@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConciliadorDeNotas"
         mc:Ignorable="d"
-        Title="Resultados" Height="700" MaxHeight="700" Width="742" MaxWidth="742" WindowStartupLocation="CenterScreen">
+        Title="Resultados" Height="700" Width="742" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary Source="/Dicionario.xaml"/>
@@ -24,9 +24,9 @@
             </StackPanel>
         </Border>
 
-        <TextBlock Margin="452,60,0,0" FontSize="14" Height="25" x:Name="labelTotalValorNotas" Text="Valor total dos produtos: R$ 500,00" HorizontalAlignment="Left" VerticalAlignment="Top" Width="272"></TextBlock>
+        <TextBlock Margin="452,60,0,0" FontSize="14" Height="25" x:Name="labelTotalValorNotas" Text="Valor total dos produtos: R$ 500,00" HorizontalAlignment="Right" VerticalAlignment="Top" Width="272"></TextBlock>
 
-        <DataGrid AutoGenerateColumns="False" x:Name="dgListagem" IsReadOnly="True" FontSize="12" HorizontalAlignment="Left" Margin="0,87,0,0" VerticalAlignment="Top" Height="582" Width="724" BorderBrush="{x:Null}" RowDetailsVisibilityMode="Collapsed">
+        <DataGrid AutoGenerateColumns="False" x:Name="dgListagem" IsReadOnly="True" FontSize="12" HorizontalAlignment="Stretch" Margin="0,87,0,0" VerticalAlignment="Stretch" Height="Auto" Width="Auto" BorderBrush="{x:Null}" RowDetailsVisibilityMode="Collapsed">
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <Canvas Height="135" Width="700">

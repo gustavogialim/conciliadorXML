@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConciliadorDeNotas"
         mc:Ignorable="d"
-        Title="Conciliador de Notas" Height="500" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Conciliador de Notas" Height="500" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" SizeChanged="Window_SizeChanged" WindowState="Maximized">
     <Grid x:Name="Conciliador">
         <Grid x:Name="LayoutRoot" Background="White">
 
@@ -54,14 +54,14 @@
                 </MenuItem>
             </Menu>
 
-            <Button x:Name="btnXML" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="White" Click="btnXML_Click" Cursor="Hand" BorderThickness="0" Width="396">
+            <Button x:Name="btnXML" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White" Click="btnXML_Click" Cursor="Hand" BorderThickness="0" Width="396" Margin="0,17,396,5" Grid.RowSpan="2">
                 <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="203">
                     <Image Source="/imgs/xml.png" Width="128" Height="128" Margin="10,40,0,0" HorizontalAlignment="Left"/>
                     <TextBlock TextAlignment="Left" FontSize="28" Text="Importar XML" Margin="140,-125,0,0" Height="40" HorizontalAlignment="Left" Width="214"/>
                 </StackPanel>
             </Button>
 
-            <Button x:Name="btnTXT" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="396,0,0,0" Background="White" Cursor="Hand" BorderThickness="0" Width="396" Click="btnTXT_Click">
+            <Button x:Name="btnTXT" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="396,0,0,0" Background="White" Cursor="Hand" BorderThickness="0" Width="396" Click="btnTXT_Click">
                 <StackPanel VerticalAlignment="Stretch" Height="203">
                     <Image Source="/imgs/txt.png" Width="128" Height="128" Margin="10,40,0,0" HorizontalAlignment="Left"/>
                     <TextBlock TextAlignment="Left" FontSize="28" Text="Importar TXT" Margin="140,-125,0,0" Height="40" HorizontalAlignment="Left" Width="237"/>
@@ -74,7 +74,7 @@
                 </StackPanel>
             </Border>
 
-            <GroupBox Visibility="Visible" x:Name="groupBoxDados"  FontSize="14" HorizontalAlignment="Left" Height="106" Margin="10,42,0,0" Grid.Row="2" VerticalAlignment="Top" Width="772">
+            <GroupBox Visibility="Visible" x:Name="groupBoxDados"  FontSize="14" HorizontalAlignment="Stretch" Height="106" Margin="10,42,0,0" Grid.Row="2" VerticalAlignment="Top">
                 <GroupBox.Header>
                     <TextBlock FontSize="16" FontWeight="Bold" Text="Dados Importados"></TextBlock>
                 </GroupBox.Header>
@@ -86,17 +86,15 @@
                 </StackPanel>
             </GroupBox>
 
-            <Button x:Name="btnSalvarProdutos" Cursor="Hand" Grid.Row="2" Width="190" Height="25" FontSize="14" Margin="10,179,592,66" FontWeight="Bold" Background="#FFDEDEDE" BorderThickness="0" Click="btnSalvarProdutos_Click">Salvar produtos</Button>
+            <Button x:Name="btnSalvarProdutos" Cursor="Hand" Grid.Row="2" HorizontalAlignment="Left" Width="190" Height="25" FontSize="14" Margin="10,179,592,66" FontWeight="Bold" Background="#FFDEDEDE" BorderThickness="0" Click="btnSalvarProdutos_Click">Salvar produtos</Button>
 
-            <Canvas Grid.Row="2">
-                <TextBlock x:Name="labelAnaliseFinalizada" Grid.Row="2" Foreground="#FF0FAA00" Visibility="Visible" FontWeight="Normal" Text="Análise finalizada." FontSize="14" Width="114" Height="17" Canvas.Left="668" Canvas.Top="243"/>
-
-                <Ellipse x:Name="elipseProdutosNaoConciliados" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FF3D9EFF" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="240" Canvas.Top="187"  />
-                <TextBlock x:Name="labelProdutosNaoConciliados" Grid.Row="2" Visibility="Visible" FontWeight="Normal" Text="0 Produtos não conciliados." FontSize="12" Width="170" Height="17" Canvas.Left="257" Canvas.Top="184"/>
-                <Ellipse x:Name="elipseProdutosValidos" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FF3AAE3A" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="441" Canvas.Top="187"  />
-                <TextBlock x:Name="labelProdutosValidos" Grid.Row="2" Visibility="Visible" FontWeight="Normal" Text="0 Produtos Válidos." FontSize="12" Width="144" Height="17" Canvas.Left="460" Canvas.Top="184"/>
-                <Ellipse x:Name="elipseProdutosInvalidos" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FFDC5F5F" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="609" Canvas.Top="187" />
-                <TextBlock x:Name="labelProdutosInvalidos" Grid.Row="2" Visibility="Visible" FontWeight="Normal" Text="0 Produtos Inválidos." FontSize="12" Width="152" Height="17" Canvas.Left="628" Canvas.Top="184"/>
+            <Canvas Grid.Row="2" Width="550" HorizontalAlignment="Right">
+                <Ellipse x:Name="elipseProdutosNaoConciliados" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FF3D9EFF" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="12" Canvas.Top="187"  />
+                <TextBlock x:Name="labelProdutosNaoConciliados" Grid.Row="2" Visibility="Visible" FontWeight="Normal" Text="0 Produtos não conciliados." FontSize="12" Width="170" Height="17" Canvas.Left="29" Canvas.Top="184"/>
+                <Ellipse x:Name="elipseProdutosValidos" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FF3AAE3A" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="209" Canvas.Top="187"  />
+                <TextBlock x:Name="labelProdutosValidos" Grid.Row="2" Visibility="Visible" FontWeight="Normal" Text="0 Produtos Válidos." FontSize="12" Width="144" Height="17" Canvas.Left="228" Canvas.Top="184"/>
+                <Ellipse x:Name="elipseProdutosInvalidos" Grid.Row="2" Width="12" Height="12" Stroke="Black" Fill="#FFDC5F5F" HorizontalAlignment="Right" VerticalAlignment="Center" Canvas.Left="378" Canvas.Top="187" />
+                <TextBlock x:Name="labelProdutosInvalidos" Grid.Row="2" HorizontalAlignment="Right" Visibility="Visible" FontWeight="Normal" Text="0 Produtos Inválidos." FontSize="12" Width="152" Height="17" Canvas.Left="397" Canvas.Top="184"/>
             </Canvas>
 
             <TextBlock x:Name="labelDadosResultadoAnaliseMensagem" Grid.Row="2" Foreground="Black" FontSize="36" Height="50" Text="Dados e Resultado da Análise" TextAlignment="Center" Margin="0,104,0,116" />
@@ -107,10 +105,11 @@
                 </StackPanel>
             </Border>-->
 
-            <Button x:Name="btnVerResultados" Cursor="Hand" Content="Ver Resultados" FontSize="23" HorizontalAlignment="Left" Margin="0,207,0,0" VerticalAlignment="Top" Width="792" Background="#FF001B36" BorderBrush="{x:Null}" Foreground="White" Height="37" Grid.Row="2" Click="btnVerResultados_Click"/>
+            <Button x:Name="btnVerResultados" Cursor="Hand" Content="Ver Resultados" FontSize="23" HorizontalAlignment="Stretch" Margin="0,207,0,0" VerticalAlignment="Top" Background="#FF001B36" BorderBrush="{x:Null}" Foreground="White" Height="37" Grid.Row="2" Click="btnVerResultados_Click"/>
+            <TextBlock x:Name="labelAnaliseFinalizada" Grid.Row="2" HorizontalAlignment="Right" Foreground="#FF0FAA00" Visibility="Visible" FontWeight="Normal" Text="Análise finalizada." FontSize="14" Width="114" Height="17" Margin="0,244,0,10"/>
 
-            <TextBlock x:Name="labelProgress" Grid.Row="2" Foreground="Black" FontSize="12" Height="21" Text="1/100" TextAlignment="Center" Margin="719,152,10,96" />
-            <ProgressBar x:Name="progress" HorizontalAlignment="Left" Height="21" Margin="10,153,0,0" Grid.Row="2" VerticalAlignment="Top" Width="704"/>
+            <TextBlock x:Name="labelProgress" Grid.Row="2" HorizontalAlignment="Right" Foreground="Black" FontSize="12" Height="21" Text="1/100" TextAlignment="Center" Margin="0,152,10,96" Width="47" />
+            <ProgressBar x:Name="progress" HorizontalAlignment="Stretch" Height="21" Margin="10,153,62,0" Grid.Row="2" VerticalAlignment="Top" />
 
         </Grid>
 
