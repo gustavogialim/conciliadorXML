@@ -8,11 +8,12 @@ namespace Classes
     {
         [Key]
         public int Id { get; set; }
-        public string cProd { get; set; }
+        public int cProd { get; set; }
         public string xProd { get; set; }
-        public string NCM { get; set; }
-        public string CEST { get; set; }
-        public string CFOP { get; set; }
-        public string CST { get; set; }
+        public decimal vProd { get; set; }
+        public int NCM { get; set; }
+        public int CEST { get; set; }
+        public int CFOP { get; set; }
+        public int CST { get; set; }
     }
 }

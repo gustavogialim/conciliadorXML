@@ -18,15 +18,21 @@
             </StackPanel>
         </Border>
 
-        <Border BorderBrush="Black" Margin="0,50,389,0" Height="32" Background="#FF48464D" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+        <Border BorderBrush="Black" Margin="0,34,389,0" Height="32" Background="#FF48464D" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                 <TextBlock  Foreground="White" FontSize="23" Height="30" Text="Lista de Produtos da análise" TextAlignment="Left" Width="343" />
             </StackPanel>
         </Border>
 
-        <TextBlock Margin="452,60,0,0" FontSize="14" Height="25" x:Name="labelTotalValorNotas" Text="Valor total dos produtos: R$ 500,00" HorizontalAlignment="Right" VerticalAlignment="Top" Width="272"></TextBlock>
+        <TextBlock Margin="0,66,389,0" FontSize="14" Height="21" x:Name="labelTotalValorNotas" Text="Valor total dos produtos: R$ 500,00" HorizontalAlignment="Stretch" VerticalAlignment="Top"></TextBlock>
 
-        <DataGrid AutoGenerateColumns="False" x:Name="dgListagem" IsReadOnly="True" FontSize="12" HorizontalAlignment="Stretch" Margin="0,87,0,0" VerticalAlignment="Stretch" Height="Auto" Width="Auto" BorderBrush="{x:Null}" RowDetailsVisibilityMode="Collapsed">
+        <Button x:Name="btnRelatorio" HorizontalAlignment="Right" VerticalAlignment="Top" Background="White" Cursor="Hand" BorderThickness="0" Margin="0,32,5,0" Height="53" Click="btnRelatorio_Click">
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="48">
+                <Image Source="/imgs/report.png" Width="48" Height="48" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Button>
+
+        <DataGrid AutoGenerateColumns="False" x:Name="dgListagem" IsReadOnly="True" FontSize="12" HorizontalAlignment="Stretch" Margin="0,90,0,0" VerticalAlignment="Stretch" Height="Auto" Width="Auto" BorderBrush="{x:Null}" RowDetailsVisibilityMode="Collapsed">
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <Canvas Height="135" Width="700">

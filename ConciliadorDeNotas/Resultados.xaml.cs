@@ -72,5 +72,12 @@ namespace ConciliadorDeNotas
                 expandCollapseButton.Content = "+";
             }
         }
+
+        private void btnRelatorio_Click(object sender, RoutedEventArgs e)
+        {
+            Relatorio result = new Relatorio(produtos);
+            result.WindowState = WindowState;
+            result.Show();
+        }
     }
 }

@@ -1,0 +1,15 @@
+﻿<Window x:Class="ConciliadorDeNotas.Relatorio"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ConciliadorDeNotas"
+        xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
+        mc:Ignorable="d"
+        Title="Relatorio" Height="700" Width="985">
+    <Grid>
+        <WindowsFormsHost HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="985" MaxWidth="985">
+            <rv:ReportViewer x:Name="ReportViewer" Load="ReportViewer_Load"/>
+        </WindowsFormsHost>
+    </Grid>
+</Window>
