@@ -1,5 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Enums;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static Classes.Nota.det.Prod;
 
 namespace Classes
 {
@@ -15,5 +18,8 @@ namespace Classes
         public int CEST { get; set; }
         public int CFOP { get; set; }
         public int CST { get; set; }
+        public STATUS STATUS { get; set; }
+        public List<Error> listaErros { get; set; } = new List<Error>();
+        public int quantidadeErros { get; set; } = 0;
     }
 }

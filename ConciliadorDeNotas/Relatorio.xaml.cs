@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Classes;
+using Microsoft.Reporting.WinForms;
+using System.IO;
 
 namespace ConciliadorDeNotas
 {
@@ -27,6 +29,7 @@ namespace ConciliadorDeNotas
             InitializeComponent();
 
             produtos = ConverterProdToProduto(_produtos);
+            produtos.OrderBy(c => c.STATUS).OrderBy(c => c.xProd);
         }
 
         private void ReportViewer_Load(object sender, EventArgs e)
@@ -35,7 +38,20 @@ namespace ConciliadorDeNotas
             ReportViewer.LocalReport.DataSources.Add(dataSource);
             ReportViewer.LocalReport.ReportEmbeddedResource = "ConciliadorDeNotas.RelatorioResultados.rdlc";
 
+            ReportViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(SubreportEventHandler);
+
             ReportViewer.RefreshReport();
+        }
+
+        private void SubreportEventHandler(object sender, SubreportProcessingEventArgs e)
+        {
+            int codigoProduto = int.Parse(e.Parameters.Where(c => c.Name == "CodigoProduto").First().Values[0]);
+            string descricaoProduto = e.Parameters.Where(c => c.Name == "DescricaoProduto").First().Values[0];
+            var erros = produtos.Where(c => c.cProd == codigoProduto && c.xProd == descricaoProduto).First().listaErros;
+
+            var dataSource = new Microsoft.Reporting.WinForms.ReportDataSource("DataSetErros", erros);
+
+            e.DataSources.Add(dataSource);
         }
 
         private List<Produto> ConverterProdToProduto(List<Nota.det.Prod> produtos)
@@ -45,14 +61,16 @@ namespace ConciliadorDeNotas
             foreach (var produto in produtos)
             {
                 produtosReturn.Add(new Produto() {
-                    cProd = int.Parse(produto.cProd),
+                    cProd = string.IsNullOrEmpty(produto.cProd) ? 0 : int.Parse(produto.cProd),
                     xProd = produto.xProd,
-                    NCM = int.Parse(produto.NCM),
-                    CST = int.Parse(produto.CST),
-                    CFOP = int.Parse(produto.CFOP),
-                    CEST = int.Parse(produto.CEST),
-                    vProd = decimal.Parse(produto.vProd.Replace(".",","))
-                    ,
+                    NCM = string.IsNullOrEmpty(produto.NCM) ? 0 : int.Parse(produto.NCM),
+                    CST = string.IsNullOrEmpty(produto.CST) ? 0 : int.Parse(produto.CST),
+                    CFOP = string.IsNullOrEmpty(produto.CFOP) ? 0 : int.Parse(produto.CFOP),
+                    CEST = string.IsNullOrEmpty(produto.CEST) ? 0 : int.Parse(produto.CEST),
+                    vProd = string.IsNullOrEmpty(produto.vProd) ? 0 : decimal.Parse(produto.vProd.Replace(".", ",")),
+                    STATUS = produto.STATUS,
+                    quantidadeErros = produto.quantidadeErros,
+                    listaErros = produto.listaErros
                 });
             }
 
