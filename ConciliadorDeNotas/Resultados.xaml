@@ -71,7 +71,7 @@
                 <DataGridTextColumn Header="Descrição" Width="*" Binding="{Binding xProd}" Foreground="#FF333333"/>
                 <DataGridTextColumn Header="Valor" Width="50" Binding="{Binding vProd}" Foreground="#FF333333"/>
                 <DataGridTextColumn Header="NCM" Width="70" Binding="{Binding NCM}" Foreground="#FF333333"/>
-                <DataGridTextColumn Header="CEST" Width="50" Binding="{Binding CEST}" Foreground="#FF333333"/>
+                <DataGridTextColumn Header="CEST" Width="55" Binding="{Binding CEST}" Foreground="#FF333333"/>
                 <DataGridTextColumn Header="CFOP" Width="50" Binding="{Binding CFOP}" Foreground="#FF333333"/>
                 <DataGridTextColumn Header="CST PIS" Width="60" Binding="{Binding CST_PIS}" Foreground="#FF333333"/>
                 <DataGridTextColumn Header="CST COFINS" Width="75" Binding="{Binding CST_COFINS}" Foreground="#FF333333"/>

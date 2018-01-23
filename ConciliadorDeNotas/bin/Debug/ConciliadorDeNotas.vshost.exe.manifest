@@ -82,7 +82,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>+l3RJsiixqykqL5Dr8Lo4o969sTB6zFKsvIotvJ2ORM=</dsig:DigestValue>
+        <dsig:DigestValue>44cGMEPiayEuM4FFx29JNlVh/2MrqSLqRGQxwpLfvUk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -194,13 +194,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="ConciliadorDeNotas.exe.config" size="311">
+  <file name="ConciliadorDeNotas.exe.config" size="338">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>i6KAXkJX+9wIaHyBgdZKhXLAASgEEDz4ttAo0m3z+b8=</dsig:DigestValue>
+      <dsig:DigestValue>w1MyrnkluUkok6E7bBjHgIWn+kb+kKI8i5iNgVanGgo=</dsig:DigestValue>
     </hash>
   </file>
   <file name="xml.ico" size="67646">

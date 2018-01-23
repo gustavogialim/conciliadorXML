@@ -6,10 +6,10 @@ using static Classes.Nota.det.Prod;
 
 namespace Classes
 {
-    [Table(name: "produtos")]
+    //[Table(name: "produtos")]
     public class Produto
     {
-        [Key]
+        //[Key]
         public int Id { get; set; }
         public int cProd { get; set; }
         public string xProd { get; set; }
