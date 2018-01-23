@@ -175,6 +175,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RelatorioResultados.rdlc" />
+    <EmbeddedResource Include="RelatorioSubErros.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Classes.Nota+det+Imposto+ICMS.datasource" />
     <None Include="Properties\DataSources\Classes.Nota+det+Imposto.datasource" />

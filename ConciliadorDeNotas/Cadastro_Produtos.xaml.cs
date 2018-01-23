@@ -92,6 +92,9 @@ namespace ConciliadorDeNotas
                     textBox.FontStyle = FontStyles.Italic;
                 }
             }
+
+            // Limpa CheckBox
+            checkBoxMonofasico.IsChecked = false;
         }
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)
@@ -107,6 +110,7 @@ namespace ConciliadorDeNotas
             txtCST.Text = string.IsNullOrEmpty(produto.NCM) ? txtCST.ToolTip.ToString() : produto.CST;
             txtCST_PIS.Text = string.IsNullOrEmpty(produto.NCM) ? txtCST_PIS.ToolTip.ToString() : produto.CST_PIS;
             txtCST_COFINS.Text = string.IsNullOrEmpty(produto.NCM) ? txtCST_COFINS.ToolTip.ToString() : produto.CST_COFINS;
+            checkBoxMonofasico.IsChecked = produto.isManofasico;
 
             foreach (object control in gridCadastroProdutos.Children)
             {
@@ -194,7 +198,8 @@ namespace ConciliadorDeNotas
                         CFOP = txtCFOP.Text,
                         CST = txtCST.Text,
                         CST_PIS = txtCST_PIS.Text,
-                        CST_COFINS = txtCST_COFINS.Text
+                        CST_COFINS = txtCST_COFINS.Text,
+                        isManofasico = checkBoxMonofasico.IsChecked
                     };
 
                     if (produtoNoBanco == null && modoCRUD.ToString() != Modo.Edicao.ToString())
@@ -257,6 +262,18 @@ namespace ConciliadorDeNotas
             {
                 //btnSalvar_Click(null, null);
             }
+        }
+
+        private void checkBoxMonofasico_Checked(object sender, RoutedEventArgs e)
+        {
+            var checkBox = sender as CheckBox;
+            checkBox.Foreground = new SolidColorBrush(Colors.Black);
+        }
+
+        private void checkBoxMonofasico_Unchecked(object sender, RoutedEventArgs e)
+        {
+            var checkBox = sender as CheckBox;
+            checkBox.Foreground = new SolidColorBrush(Colors.Gray);
         }
     }
 }

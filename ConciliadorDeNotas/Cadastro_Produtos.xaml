@@ -42,6 +42,7 @@
         <TextBox x:Name="txtCST" Padding="5" Foreground="Gray" FontSize="14" FontStyle="Italic" HorizontalAlignment="Left" Height="34" Margin="10,173,0,0" TextWrapping="Wrap" Text="CST ICMS" ToolTip="CST ICMS"  VerticalAlignment="Top" Width="113" GotFocus="GotFocusTextoBox" LostFocus="LostFocusTextoBox"/>
         <TextBox x:Name="txtCST_PIS" Padding="5" Foreground="Gray" FontSize="14" FontStyle="Italic" HorizontalAlignment="Left" Height="34" Margin="128,173,0,0" TextWrapping="Wrap" Text="CST PIS" ToolTip="CST PIS"  VerticalAlignment="Top" Width="113" GotFocus="GotFocusTextoBox" LostFocus="LostFocusTextoBox"/>
         <TextBox x:Name="txtCST_COFINS" Padding="5" Foreground="Gray" FontSize="14" FontStyle="Italic" HorizontalAlignment="Left" Height="34" Margin="246,173,0,0" TextWrapping="Wrap" Text="CST COFINS" ToolTip="CST COFINS"  VerticalAlignment="Top" Width="113" GotFocus="GotFocusTextoBox" LostFocus="LostFocusTextoBox" KeyUp="txtCST_COFINS_KeyUp"/>
+        <CheckBox x:Name="checkBoxMonofasico" Cursor="Hand" Foreground="Gray" FontSize="14" HorizontalAlignment="Left" Height="18" Margin="364,182,0,0" ToolTip="Produto Monofásico"  VerticalAlignment="Top" Width="113" Checked="checkBoxMonofasico_Checked" Unchecked="checkBoxMonofasico_Unchecked">Monofásico</CheckBox>
 
         <Button x:Name="btnSalvar" Cursor="Hand" Content="Salvar" FontSize="20" HorizontalAlignment="Left" Margin="28,224,0,0" VerticalAlignment="Top" Width="155" Background="#FF006DDA" BorderBrush="{x:Null}" Foreground="White" Height="41" Click="btnSalvar_Click"/>
         <Button x:Name="btnLimpar" Cursor="Hand" Content="Limpar" FontSize="20" HorizontalAlignment="Left" Margin="188,224,0,0" VerticalAlignment="Top" Width="155" Background="#FF006DDA" BorderBrush="{x:Null}" Foreground="White" Height="41" Click="btnLimpar_Click"/>
@@ -60,6 +61,7 @@
                 <DataGridTextColumn Header="CFOP" Width="50" Binding="{Binding CFOP}" Foreground="#FF333333"/>
                 <DataGridTextColumn Header="CST PIS" Width="60" Binding="{Binding CST_PIS}" Foreground="#FF333333"/>
                 <DataGridTextColumn Header="CST COF." Width="60" Binding="{Binding CST_COFINS}" Foreground="#FF333333"/>
+                <DataGridCheckBoxColumn Header="Monofásico" Width="73" Binding="{Binding isManofasico}"/>
                 <DataGridTemplateColumn Header="Editar" Width="45" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

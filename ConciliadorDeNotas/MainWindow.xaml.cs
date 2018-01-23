@@ -881,6 +881,10 @@ namespace ConciliadorDeNotas
 
                     continue;
                 }
+                else
+                {
+                    produto.isManofasico = produtoBanco.isManofasico;
+                }
 
                 if (produto.NCM != produtoBanco.NCM)
                 {

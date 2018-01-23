@@ -154,6 +154,10 @@ namespace Classes
                 /// </summary>
                 public string CST_COFINS { get; set; }
                 /// <summary>
+                /// Define se o produto é Monofasico
+                /// </summary>
+                public bool? isManofasico { get; set; }
+                /// <summary>
                 /// Conciliado - Define se o produto da nota foi conciliado  com o do banco
                 /// </summary>
                 [NotMapped]
@@ -205,6 +209,16 @@ namespace Classes
                 public class Error
                 {
                     public string Message { get; set; }
+                }
+
+                public Prod()
+                {
+                    isManofasico = false;
+                }
+
+                public override string ToString()
+                {
+                    return $"{xProd} ({isManofasico})";
                 }
             }
 

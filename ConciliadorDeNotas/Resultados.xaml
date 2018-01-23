@@ -36,7 +36,7 @@
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <Canvas Height="135" Width="700">
-                        <ListView HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="700" ItemsSource="{Binding listaErros}">
+                        <ListView HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top" ItemsSource="{Binding listaErros}">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Erros" Width="685" DisplayMemberBinding="{Binding Message}"/>

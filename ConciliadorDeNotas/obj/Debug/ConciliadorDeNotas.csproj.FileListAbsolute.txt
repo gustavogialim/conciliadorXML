@@ -131,3 +131,8 @@ C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\Relatorio.baml
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\RdlCompile.cache
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\RdlCompile.compiled
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\Relatorio.g.cs
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\Relatorio.baml
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\RdlCompile.cache
+C:\Users\DEV03\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\RdlCompile.compiled
