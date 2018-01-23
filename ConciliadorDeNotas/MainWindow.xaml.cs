@@ -94,7 +94,6 @@ namespace ConciliadorDeNotas
                             return;
                         }
 
-
                         if (fileExtension == ".zip")
                         {
                             temp = System.IO.Path.GetTempPath();
