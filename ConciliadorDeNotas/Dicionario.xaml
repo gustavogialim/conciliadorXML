@@ -3,5 +3,6 @@
                     xmlns:local="clr-namespace:Classes;assembly=Classes">
 
     <local:ConverteToBrush x:Key="ConverteToBrush"/>
+    <local:PriceConverter1 x:Key="PriceConverter1" />
 
 </ResourceDictionary>

@@ -24,20 +24,49 @@ namespace ConciliadorDeNotas
         #region Variáveis
 
         List<Nota.det.Prod> produtos = new List<Nota.det.Prod>();
+        List<Empresa> listaDeEmpresa = new List<Empresa>();
         decimal totalProdutosNota = 0;
-        
+
         #endregion
 
-        public Resultados(List<Nota.det.Prod> _produtos)
+        public Resultados(List<Nota.det.Prod> _produtos, List<Empresa> _listaDeEmpresa)
         {
             InitializeComponent();
 
-            produtos = _produtos;
+            // Pega produtos clonando
+            foreach (var produto in _produtos)
+            {
+                produtos.Add(ObjectCopier.Clone(produto));
+            }
 
-            dgListagem.ItemsSource = produtos.OrderBy(c => c.STATUS).ToList();
+            listaDeEmpresa = _listaDeEmpresa;
 
-            totalProdutosNota = produtos.Sum(c => decimal.Parse(c.vProd.Replace(".",",")));
+            // Formata vProd
+            try {
+                foreach (var produto in produtos)
+                {
+                    produto.vProd = decimal.Parse(produto.vProd.Replace(".", ",")).ToString("##,###,##0.00");
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            dgListagem.ItemsSource = produtos.OrderBy(c => c.STATUS).ThenBy(c => c.xProd).ToList();
+
+            //totalProdutosNota = produtos.Sum(c => decimal.Parse(c.vProd.Replace(".",",")));
+            totalProdutosNota = produtos.Sum(c => c.vProdTotal);
             labelTotalValorNotas.Text = "Valor total dos produtos: R$ " + totalProdutosNota.ToString("#,###,##0.00");
+
+            if (listaDeEmpresa.Count == 1)
+            {
+                labelCNPJRazaoSocial.Text = $"CNPJ: {listaDeEmpresa.First().cnpj}, Razão Social: {listaDeEmpresa.First().empresaRazaoSocial}";
+            }
+            else
+            {
+                labelCNPJRazaoSocial.Text = "Não foi possível detectar a empresa emitente.";
+            }
         }
 
         private void HandleExpandCollapseForAll(object sender, RoutedEventArgs e)
@@ -75,9 +104,16 @@ namespace ConciliadorDeNotas
 
         private void btnRelatorio_Click(object sender, RoutedEventArgs e)
         {
-            Relatorio result = new Relatorio(produtos);
-            result.WindowState = WindowState;
-            result.Show();
+            try
+            {
+                Relatorio result = new Relatorio(produtos, listaDeEmpresa);
+                result.WindowState = WindowState;
+                result.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao abrir relatório.\nErro Interno: " + ex.Message + "\nInner" + ex?.InnerException?.Message);
+            }
         }
     }
 }

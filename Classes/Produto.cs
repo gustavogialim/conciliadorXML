@@ -11,9 +11,11 @@ namespace Classes
     {
         //[Key]
         public int Id { get; set; }
-        public int cProd { get; set; }
+        public string cProd { get; set; }
         public string xProd { get; set; }
+        public decimal qCom { get; set; }
         public decimal vProd { get; set; }
+        public decimal vProdTotal { get; set; }
         public int NCM { get; set; }
         public int CEST { get; set; }
         public int CFOP { get; set; }

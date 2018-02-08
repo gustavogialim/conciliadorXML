@@ -5,6 +5,5 @@ C:\Users\DEV03\Documents\Projetos\conciliadorXML\Enums\obj\Debug\Enums.dll
 C:\Users\DEV03\Documents\Projetos\conciliadorXML\Enums\obj\Debug\Enums.pdb
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\Enums\bin\Debug\Enums.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\Enums\bin\Debug\Enums.pdb
-C:\Users\Gustavo\Documents\Projetos\conciliadorXML\Enums\obj\Debug\Enums.csprojResolveAssemblyReference.cache
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\Enums\obj\Debug\Enums.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\Enums\obj\Debug\Enums.pdb

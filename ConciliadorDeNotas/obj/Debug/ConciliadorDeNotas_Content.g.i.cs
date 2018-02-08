@@ -8,6 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("imgs/report.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("msvcr110.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("sqlserverspatial120.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("msvcr110.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("sqlserverspatial120.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("sqlservertypes/readme.htm")]
 
 

@@ -41,6 +41,9 @@ namespace ConciliadorDeNotas
         List<string> linhasTXT = new List<string>();
         IMPORTACAO importacao = IMPORTACAO.XML;
         WindowState windowStateParent = WindowState.Normal;
+        string cnpjEmpresa = "";
+        string empresaRazaoSocial = "";
+        List<Empresa> listaDeEmpresa = new List<Empresa>();
 
         string fileName = "";
         string fileExtension = "";
@@ -48,6 +51,7 @@ namespace ConciliadorDeNotas
         List<string> files = new List<string>();
         string xmlsComErro = "";
         int countFilesComErro = 0;
+        int countFilesSemProduto = 0;
 
         string fileNameTxt = "";
         string fileExtensionTxt = "";
@@ -70,11 +74,18 @@ namespace ConciliadorDeNotas
 
         private void btnXML_Click(object sender, RoutedEventArgs e)
         {
+            ExibeComponentsDados(false);
+            labelDadosResultadoAnaliseMensagem.Text = "Extraindo arquivo..";
+
             importacao = IMPORTACAO.XML;
             produtosNota.Clear();
             files.Clear();
             countFilesComErro = 0;
+            countFilesSemProduto = 0;
             ds = new DataSet();
+
+            cnpjEmpresa = "";
+            empresaRazaoSocial = "";
 
             fileDialog.Multiselect = false;
             fileDialog.Filter = "Arquivos XML/ZIP (*.xml;*.zip)|*.xml;*.zip|Todos Arquivos (*.*)|*.*";
@@ -149,7 +160,6 @@ namespace ConciliadorDeNotas
 
                         // Zera ProgressBar
                         labelDadosResultadoAnaliseMensagem.Text = "Carregando..";
-
                         progress.Value = 0;
                         progress.Maximum = files.Count;
                         progress.Visibility = Visibility.Visible;
@@ -226,6 +236,34 @@ namespace ConciliadorDeNotas
                     //return;
                 }
 
+                #region Pega Dados emitente
+
+                try
+                {
+
+                    DataTable emit = !ds.Tables.Contains("emit") ? null : ds.Tables["emit"];
+                    DataColumnCollection emitCol = emit != null ? emit.Columns : null;
+
+                    if (emit != null)
+                    {
+                        cnpjEmpresa = emit.AsEnumerable().FirstOrDefault().Field<string>("CNPJ");
+                        empresaRazaoSocial = emit.AsEnumerable().FirstOrDefault().Field<string>("xNome");
+
+                        if (listaDeEmpresa.Where(c => c.cnpj == cnpjEmpresa).FirstOrDefault() == null)
+                        {
+                            listaDeEmpresa.Add(new Empresa()
+                            {
+                                cnpj = cnpjEmpresa,
+                                empresaRazaoSocial = empresaRazaoSocial
+                            });
+                        }
+                    }
+
+                }
+                catch { }
+
+                #endregion
+
                 // Det
                 DataTable det = !ds.Tables.Contains("det") ? null : ds.Tables["det"];
                 DataColumnCollection detCol = det != null ? det.Columns : null;
@@ -240,12 +278,8 @@ namespace ConciliadorDeNotas
 
                 if (det == null)
                 {
-                    this.Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        MessageBox.Show("XML Inválido, este xml não é uma nota ou não contém nenhum produto.");
-                    }));
+                    countFilesSemProduto++;
                     continue;
-                    //return;
                 }
 
                 // Det JOIN Produtos
@@ -303,6 +337,7 @@ namespace ConciliadorDeNotas
                             }
 
                             // CST PIS 
+                            #region CST PIS 
                             DataTable pis = !ds.Tables.Contains("PIS") ? null : ds.Tables["PIS"];
                             DataColumnCollection pisCol = pis != null ? pis.Columns : null;
 
@@ -317,20 +352,59 @@ namespace ConciliadorDeNotas
                                 {
                                     var PisAliqInstance = PisAliq.AsEnumerable().Where(c => c.Field<int>("pis_id") == pisInstance.Field<int>("pis_id")).FirstOrDefault();
 
-                                    detInstance.prod.CST_PIS = PisAliqCol.Contains("CST") ? PisAliqInstance.Field<string>("CST") : "";
+                                    if (PisAliqInstance != null)
+                                        detInstance.prod.CST_PIS = PisAliqCol.Contains("CST") ? PisAliqInstance.Field<string>("CST") : "";
                                 }
-                                else
-                                {
-                                    DataTable PisOutr = ds.Tables["PisOutr"];
-                                    DataColumnCollection PisOutrCol = PisOutr != null ? PisOutr.Columns : null;
 
+                                DataTable PisOutr = ds.Tables["PisOutr"];
+                                DataColumnCollection PisOutrCol = PisOutr != null ? PisOutr.Columns : null;
+
+                                if (PisOutr != null)
+                                {
                                     var PisAliqInstance = PisOutr.AsEnumerable().Where(c => c.Field<int>("pis_id") == pisInstance.Field<int>("pis_id")).FirstOrDefault();
 
-                                    detInstance.prod.CST_PIS = PisOutrCol.Contains("CST") ? PisAliqInstance.Field<string>("CST") : "";
+                                    if (PisAliqInstance != null)
+                                        detInstance.prod.CST_PIS = PisOutrCol.Contains("CST") ? PisAliqInstance.Field<string>("CST") : "";
+                                }
+
+                                DataTable PisSN = ds.Tables["PISSN"];
+                                DataColumnCollection PisSNCol = PisSN != null ? PisSN.Columns : null;
+
+                                if (PisSN != null)
+                                {
+                                    var PisAliqInstance = PisSN.AsEnumerable().Where(c => c.Field<int>("pis_id") == pisInstance.Field<int>("pis_id")).FirstOrDefault();
+
+                                    if (PisAliqInstance != null)
+                                        detInstance.prod.CST_PIS = PisSNCol.Contains("CST") ? PisAliqInstance.Field<string>("CST") : "";
+                                }
+
+
+                                DataTable PisNT = ds.Tables["PISNT"];
+                                DataColumnCollection PisNTCol = PisNT != null ? PisNT.Columns : null;
+
+                                if (PisNT != null)
+                                {
+                                    var PisAliqInstance = PisNT.AsEnumerable().Where(c => c.Field<int>("pis_id") == pisInstance.Field<int>("pis_id")).FirstOrDefault();
+
+                                    if (PisAliqInstance != null)
+                                        detInstance.prod.CST_PIS = PisNTCol.Contains("CST") ? PisAliqInstance.Field<string>("CST") : "";
+                                }
+
+                                DataTable PisST = ds.Tables["PISST"];
+                                DataColumnCollection PisSTCol = PisST != null ? PisST.Columns : null;
+
+                                if (PisST != null)
+                                {
+                                    var PisAliqInstance = PisST.AsEnumerable().Where(c => c.Field<int>("pis_id") == pisInstance.Field<int>("pis_id")).FirstOrDefault();
+
+                                    if (PisAliqInstance != null)
+                                        detInstance.prod.CST_PIS = PisSTCol.Contains("CST") ? PisAliqInstance.Field<string>("CST") : "";
                                 }
                             }
+                            #endregion
 
                             // CST COFINS 
+                            #region CST COFINS 
                             DataTable cofins = !ds.Tables.Contains("COFINS") ? null : ds.Tables["COFINS"];
                             DataColumnCollection cofinsCol = pis != null ? pis.Columns : null;
 
@@ -345,25 +419,75 @@ namespace ConciliadorDeNotas
                                 {
                                     var CofinsAliqInstance = CofinsAliq.AsEnumerable().Where(c => c.Field<int>("cofins_id") == confinsInstance.Field<int>("cofins_id")).FirstOrDefault();
 
-                                    detInstance.prod.CST_COFINS = CofinsAliqCol.Contains("CST") ? CofinsAliqInstance.Field<string>("CST") : "";
+                                    if (CofinsAliqInstance != null)
+                                        detInstance.prod.CST_COFINS = CofinsAliqCol.Contains("CST") ? CofinsAliqInstance.Field<string>("CST") : "";
                                 }
-                                else
-                                {
-                                    DataTable CofinsOutr = ds.Tables["CofinsOutr"];
-                                    DataColumnCollection CofinsOutrCol = CofinsOutr != null ? CofinsOutr.Columns : null;
 
+                                DataTable CofinsOutr = ds.Tables["CofinsOutr"];
+                                DataColumnCollection CofinsOutrCol = CofinsOutr != null ? CofinsOutr.Columns : null;
+
+                                if (CofinsOutr != null)
+                                {
                                     var CofinsAliqInstance = CofinsOutr.AsEnumerable().Where(c => c.Field<int>("cofins_id") == confinsInstance.Field<int>("cofins_id")).FirstOrDefault();
 
-                                    detInstance.prod.CST_COFINS = CofinsOutrCol.Contains("CST") ? CofinsAliqInstance.Field<string>("CST") : "";
+                                    if (CofinsAliqInstance != null)
+                                        detInstance.prod.CST_COFINS = CofinsOutrCol.Contains("CST") ? CofinsAliqInstance.Field<string>("CST") : "";
+                                }
+
+                                DataTable CofinsSN = ds.Tables["CofinsSn"];
+                                DataColumnCollection CofinsSNCol = CofinsSN != null ? CofinsSN.Columns : null;
+
+                                if (CofinsSN != null)
+                                {
+                                    var CofinsAliqInstance = CofinsSN.AsEnumerable().Where(c => c.Field<int>("cofins_id") == confinsInstance.Field<int>("cofins_id")).FirstOrDefault();
+
+                                    if (CofinsAliqInstance != null)
+                                        detInstance.prod.CST_COFINS = CofinsSNCol.Contains("CST") ? CofinsAliqInstance.Field<string>("CST") : "";
+                                }
+
+                                DataTable CofinsNT = ds.Tables["CofinsNT"];
+                                DataColumnCollection CofinsNTCol = CofinsNT != null ? CofinsNT.Columns : null;
+
+                                if (CofinsNT != null)
+                                {
+                                    var CofinsAliqInstance = CofinsNT.AsEnumerable().Where(c => c.Field<int>("cofins_id") == confinsInstance.Field<int>("cofins_id")).FirstOrDefault();
+
+                                    if (CofinsAliqInstance != null)
+                                        detInstance.prod.CST_COFINS = CofinsNTCol.Contains("CST") ? CofinsAliqInstance.Field<string>("CST") : "";
+                                }
+
+                                DataTable CofinsST = ds.Tables["CofinsST"];
+                                DataColumnCollection CofinsSTCol = CofinsST != null ? CofinsST.Columns : null;
+
+                                if (CofinsST != null)
+                                {
+                                    var CofinsAliqInstance = CofinsST.AsEnumerable().Where(c => c.Field<int>("cofins_id") == confinsInstance.Field<int>("cofins_id")).FirstOrDefault();
+
+                                    if (CofinsAliqInstance != null)
+                                        detInstance.prod.CST_COFINS = CofinsSTCol.Contains("CST") ? CofinsAliqInstance.Field<string>("CST") : "";
                                 }
                             }
+                            #endregion
                         }
 
-                        var produtoExiste = produtosNota.Where(c => c.xProd == detInstance.prod.xProd);
-                        if (produtoExiste.Count() == 0)
+                        detInstance.prod.vProd = decimal.Round(detInstance.prod.vUnCom, 2).ToString().Replace(",", ".");
+                        decimal vProdDecimal = decimal.Parse(detInstance.prod.vProd.Replace(".", ","));
+                        detInstance.prod.vProdTotal = vProdDecimal * detInstance.prod.qCom;
+
+                        var produtoExiste = produtosNota.Where(c => c.xProd == detInstance.prod.xProd).FirstOrDefault();
+
+                        if (produtoExiste == null)
                         {
                             nota.detList.Add(detInstance);
                             produtosNota.Add(detInstance.prod);
+                        }
+                        else
+                        {
+                            decimal vProdMedia = (produtoExiste.vProdTotal + detInstance.prod.vProdTotal) / (produtoExiste.qCom + detInstance.prod.qCom);
+
+                            produtoExiste.qCom = produtoExiste.qCom + detInstance.prod.qCom;
+                            produtoExiste.vProdTotal = produtoExiste.vProdTotal + detInstance.prod.vProdTotal;
+                            produtoExiste.vProd = vProdMedia.ToString("#,###,##0.00");
                         }
                     }
                     catch (Exception ex)
@@ -391,7 +515,8 @@ namespace ConciliadorDeNotas
                 // Insere Dados
                 labelCliente.Text = String.Format("Notas encontradas: {0}", files.Count);
                 labelCNPJ.Text = String.Format("Notas inválidas: {0}", countFilesComErro);
-                labelDataEmissao.Text = String.Format("Notas válidas: {0}", files.Count - countFilesComErro);
+                labelXMLSemProduto.Text = String.Format("Notas sem produto: {0}", countFilesSemProduto);
+                labelDataEmissao.Text = String.Format("Notas válidas: {0}", files.Count - countFilesComErro - countFilesSemProduto);
                 labelProdutos.Text = String.Format("Produtos Encontrados: {0}", produtosNota.Count);
 
                 labelProdutosNaoConciliados.Text = String.Format("{0} produtos não conciliados.", produtosNota.Where(c => c.STATUS == STATUS.NaoConciliado).Count());
@@ -405,11 +530,17 @@ namespace ConciliadorDeNotas
 
         private void btnTXT_Click(object sender, RoutedEventArgs e)
         {
+            ExibeComponentsDados(false);
+            labelDadosResultadoAnaliseMensagem.Text = "Extraindo arquivo..";
+
             importacao = IMPORTACAO.TXT;
             produtosTxt.Clear();
             filesTxt.Clear();
             linhasTXT.Clear();
             countFilesComErroTxt = 0;
+
+            cnpjEmpresa = "";
+            empresaRazaoSocial = "";
 
             fileDialog.Multiselect = false;
             fileDialog.Filter = "Todos Arquivos (*.*)|*.*";
@@ -420,9 +551,9 @@ namespace ConciliadorDeNotas
                     fileNameTxt = fileDialog.FileName;
                     fileExtensionTxt = fileNameTxt.Substring(fileNameTxt.Length - 4, 4);
 
-                    if (fileExtensionTxt.Contains("F") && fileExtensionTxt != ".zip")
+                    if (fileExtensionTxt == ".rar")
                     {
-                        MessageBox.Show("Selecione um arquivo válido.");
+                        MessageBox.Show("Somente arquivos compactados em fomato ZIP são aceitos.");
                         return;
                     }
 
@@ -450,7 +581,8 @@ namespace ConciliadorDeNotas
 
                                         foreach (var entri in zip.EntryFileNames)
                                         {
-                                            filesTxt.Add(temp + "\\" + entri);
+                                            if (!entri.EndsWith("/"))
+                                                filesTxt.Add(temp + "\\" + entri);
                                         }
                                     }
                                     catch (Exception ex)
@@ -483,7 +615,6 @@ namespace ConciliadorDeNotas
 
                     // Zera ProgressBar
                     labelDadosResultadoAnaliseMensagem.Text = "Carregando..";
-
                     progress.Value = 0;
                     progress.Maximum = filesTxt.Count;
                     progress.Visibility = Visibility.Visible;
@@ -575,18 +706,6 @@ namespace ConciliadorDeNotas
             {
                 try
                 {
-                    string Extension = file.Substring(file.Length - 4, 4);
-                    if (!Extension.Contains("F"))
-                    {
-                        countFilesComErroTxt++;
-
-                        this.Dispatcher.BeginInvoke(new Action(() =>
-                        {
-                            progress.Value++;
-                            labelProgress.Text = progress.Value + "/" + progress.Maximum;
-                        }));
-                        continue;
-                    }
 
                     Stream fileStream = File.Open(file, FileMode.Open);
                     StreamReader fileReader = new StreamReader(fileStream);
@@ -605,7 +724,32 @@ namespace ConciliadorDeNotas
                     // Fecha arquivo
                     fileStream.Dispose();
 
-                    linhasTXT = linhasTXT.Where(c => c.Contains("E15")).ToList();
+                    #region Pega Dados emitente
+
+                    try
+                    {
+                        string registroE02 = linhasTXT.Where(c => c.StartsWith("E02")).FirstOrDefault();
+
+                        if (registroE02 != null)
+                        {
+                            cnpjEmpresa = registroE02.Substring(44, 14);
+                            empresaRazaoSocial = registroE02.Substring(72, 40);
+
+                            if (listaDeEmpresa.Where(c => c.cnpj == cnpjEmpresa).FirstOrDefault() == null)
+                            {
+                                listaDeEmpresa.Add(new Empresa()
+                                {
+                                    cnpj = cnpjEmpresa,
+                                    empresaRazaoSocial = empresaRazaoSocial
+                                });
+                            }
+                        }
+                    }
+                    catch { }
+
+                    #endregion
+
+                    linhasTXT = linhasTXT.Where(c => c.StartsWith("E15")).ToList();
 
                     produtosTxt.Clear();
 
@@ -613,31 +757,56 @@ namespace ConciliadorDeNotas
                     {
                         string cProd = linha.Substring(61, 14).Trim(' ').ToString();
                         string xProd = linha.Substring(75, 100).TrimEnd(' ').ToString();
+                        string qCom = linha.Substring(175, 7).TrimEnd(' ').ToString();
                         string vProd = linha.Substring(185, 8).Trim(' ').ToString();
 
+                        qCom = qCom.Substring(0, 4).TrimStart('0') + "." + qCom.Substring(4, 3);
                         vProd = vProd.Substring(0, 6).TrimStart('0') + "." + vProd.Substring(6, 2);
 
+                        decimal qComDecimal = decimal.Parse(qCom.Replace(".", ","));
                         decimal vProdDecimal = decimal.Parse(vProd.Replace(".", ","));
 
                         var produtoInstance = new Nota.det.Prod()
                         {
                             cProd = cProd,
                             xProd = xProd,
+                            qCom = qComDecimal,
                             vProd = vProdDecimal.ToString("#,###,##0.00"),
+                            vProdTotal = qComDecimal * vProdDecimal,
                             STATUS = STATUS.NaoConciliado,
                             CorStatus = "#FF008BFF",
                             Visibility = Visibility.Collapsed
-                    };
-                        var produtoExiste = produtosTxt.Where(c => c.xProd == produtoInstance.xProd); //c.cProd == produtoInstance.cProd && c.vProd == produtoInstance.vProd
-                        if (produtoExiste.Count() == 0)
+                        };
+
+                        var produtoExiste = produtosTxt.Where(c => c.xProd == produtoInstance.xProd).FirstOrDefault(); //c.cProd == produtoInstance.cProd && c.vProd == produtoInstance.vProd
+
+                        if (produtoExiste == null)
+                        {
                             produtosTxt.Add(produtoInstance);
+                        }
+                        else
+                        {
+                            decimal vProdMedia = (produtoExiste.vProdTotal + produtoInstance.vProdTotal) / (produtoExiste.qCom + produtoInstance.qCom);
+
+                            produtoExiste.qCom = produtoExiste.qCom + produtoInstance.qCom;
+                            produtoExiste.vProdTotal = produtoExiste.vProdTotal + produtoInstance.vProdTotal;
+                            produtoExiste.vProd = vProdMedia.ToString("#,###,##0.00");
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
                     //MessageBox.Show("Arquivo Inválido, selecione um arquivo válido!\n\n" + "Execeção interna: " + ex.Message);
                     //return;
-                    countFilesComErroTxt++;
+                    if (!file.EndsWith("/")) // Verifica se o file não termina com '/' para não pegar diretórios
+                    {
+                        countFilesComErroTxt++;
+                        this.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            progress.Value++;
+                            labelProgress.Text = progress.Value + "/" + progress.Maximum;
+                        }));
+                    }
                 }
             }
 
@@ -653,6 +822,7 @@ namespace ConciliadorDeNotas
             {
                 labelCliente.Text = String.Format("Arquivos encontradas: {0}", filesTxt.Count);
                 labelCNPJ.Text = String.Format("Arquivos inválidos: {0}", countFilesComErroTxt);
+                labelXMLSemProduto.Text = String.Format("Arquivos sem produto: {0}", 0);
                 labelDataEmissao.Text = String.Format("Arquivos válidos: {0}", filesTxt.Count - countFilesComErroTxt);
                 labelProdutos.Text = String.Format("Produtos Encontrados: {0}", produtosTxt.Count);
 
@@ -699,26 +869,31 @@ namespace ConciliadorDeNotas
 
                 foreach (var column in produto.Table.Columns)
                 {
-                    var columnObj = ((DataColumn)column);
+                    try
+                    {
+                        var columnObj = ((DataColumn)column);
 
-                    var property = produtoInstance.GetType().GetProperty(columnObj.ColumnName);
-                    object columnValue = null;
+                        var property = produtoInstance.GetType().GetProperty(columnObj.ColumnName);
+                        object columnValue = null;
 
-                    if (property == null)
-                        continue;
+                        if (property == null)
+                            continue;
 
-                    if (property.PropertyType.ToString() == "System.Int")
-                        columnValue = produto.Field<int>(columnObj.ColumnName);
-                    if (property.PropertyType.ToString() == "System.Decimal")
-                        columnValue = decimal.Parse(produto.Field<string>(columnObj.ColumnName).Replace(".", ","));
-                    if (property.PropertyType.ToString() == "System.Double")
-                        columnValue = produto.Field<double>(columnObj.ColumnName);
-                    if (property.PropertyType.ToString() == "System.String")
-                        columnValue = produto.Field<string>(columnObj.ColumnName);
-                    if (property.PropertyType.ToString() == "System.DateTime")
-                        columnValue = produto.Field<DateTime>(columnObj.ColumnName);
+                        if (property.PropertyType.ToString() == "System.Int")
+                            columnValue = produto.Field<int>(columnObj.ColumnName);
+                        if (property.PropertyType.ToString() == "System.Decimal")
+                            columnValue = decimal.Parse(produto.Field<string>(columnObj.ColumnName).Replace(".", ","));
+                        if (property.PropertyType.ToString() == "System.Double")
+                            columnValue = produto.Field<double>(columnObj.ColumnName);
+                        if (property.PropertyType.ToString() == "System.String")
+                            columnValue = produto.Field<string>(columnObj.ColumnName);
+                        if (property.PropertyType.ToString() == "System.DateTime")
+                            columnValue = produto.Field<DateTime>(columnObj.ColumnName);
 
-                    produtoInstance.GetType().GetProperty(columnObj.ColumnName).SetValue(produtoInstance, columnValue);
+                        produtoInstance.GetType().GetProperty(columnObj.ColumnName).SetValue(produtoInstance, columnValue);
+                    }
+                    catch { }
+
                 }
                 produtosReturn.Add(produtoInstance);
             }
@@ -737,26 +912,30 @@ namespace ConciliadorDeNotas
 
                 foreach (var column in imposto.Table.Columns)
                 {
-                    var columnObj = ((DataColumn)column);
+                    try
+                    {
+                        var columnObj = ((DataColumn)column);
 
-                    var property = impostoInstance.GetType().GetProperty(columnObj.ColumnName);
-                    object columnValue = null;
+                        var property = impostoInstance.GetType().GetProperty(columnObj.ColumnName);
+                        object columnValue = null;
 
-                    if (property == null)
-                        continue;
+                        if (property == null)
+                            continue;
 
-                    if (property.PropertyType.ToString() == "System.Int")
-                        columnValue = imposto.Field<int>(columnObj.ColumnName);
-                    if (property.PropertyType.ToString() == "System.Decimal")
-                        columnValue = decimal.Parse(imposto.Field<string>(columnObj.ColumnName).Replace(".", ","));
-                    if (property.PropertyType.ToString() == "System.Double")
-                        columnValue = imposto.Field<double>(columnObj.ColumnName);
-                    if (property.PropertyType.ToString() == "System.String")
-                        columnValue = imposto.Field<string>(columnObj.ColumnName);
-                    if (property.PropertyType.ToString() == "System.DateTime")
-                        columnValue = imposto.Field<DateTime>(columnObj.ColumnName);
+                        if (property.PropertyType.ToString() == "System.Int")
+                            columnValue = imposto.Field<int>(columnObj.ColumnName);
+                        if (property.PropertyType.ToString() == "System.Decimal")
+                            columnValue = decimal.Parse(imposto.Field<string>(columnObj.ColumnName).Replace(".", ","));
+                        if (property.PropertyType.ToString() == "System.Double")
+                            columnValue = imposto.Field<double>(columnObj.ColumnName);
+                        if (property.PropertyType.ToString() == "System.String")
+                            columnValue = imposto.Field<string>(columnObj.ColumnName);
+                        if (property.PropertyType.ToString() == "System.DateTime")
+                            columnValue = imposto.Field<DateTime>(columnObj.ColumnName);
 
-                    impostoInstance.GetType().GetProperty(columnObj.ColumnName).SetValue(impostoInstance, columnValue);
+                        impostoInstance.GetType().GetProperty(columnObj.ColumnName).SetValue(impostoInstance, columnValue);
+                    }
+                    catch { }
                 }
                 impostoReturn.Add(impostoInstance);
             }
@@ -1042,7 +1221,7 @@ namespace ConciliadorDeNotas
         {
             var produtosASeremExibidos = importacao == IMPORTACAO.XML ? produtosNota : produtosTxt;
 
-            Resultados result = new Resultados(produtosASeremExibidos);
+            Resultados result = new Resultados(produtosASeremExibidos, listaDeEmpresa);
             result.WindowState = windowStateParent;
             result.Show();
         }

@@ -6,13 +6,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.60042cm</Width>
+              <Width>2.57938cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>10.97812cm</Width>
+              <Width>10.52833cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>1.97083cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.73271cm</Width>
@@ -547,7 +547,7 @@
                       <ReportName>RelatorioSubErros</ReportName>
                       <Parameters>
                         <Parameter Name="CodigoProduto">
-                          <Value>=Fields!cProd.Value</Value>
+                          <Value>=Fields!Id.Value</Value>
                         </Parameter>
                         <Parameter Name="DescricaoProduto">
                           <Value>=Fields!xProd.Value</Value>
@@ -901,13 +901,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.60042cm</Width>
+              <Width>2.55292cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>10.97812cm</Width>
+              <Width>10.50187cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>1.97083cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.73271cm</Width>
@@ -1442,7 +1442,7 @@
                       <ReportName>RelatorioSubErros</ReportName>
                       <Parameters>
                         <Parameter Name="CodigoProduto">
-                          <Value>=Fields!cProd.Value</Value>
+                          <Value>=Fields!Id.Value</Value>
                         </Parameter>
                         <Parameter Name="DescricaoProduto">
                           <Value>=Fields!xProd.Value</Value>
@@ -1469,7 +1469,6 @@
                       </Style>
                     </Subreport>
                     <ColSpan>8</ColSpan>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />
@@ -1787,7 +1786,7 @@
         <Top>4.05133cm</Top>
         <Left>0.02646cm</Left>
         <Height>2.4cm</Height>
-        <Width>25.40896cm</Width>
+        <Width>25.35604cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -1816,7 +1815,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox42</rd:DefaultName>
         <Top>0.03528cm</Top>
-        <Left>0.02646cm</Left>
+        <Left>0.03969cm</Left>
         <Height>0.6cm</Height>
         <Width>25.3825cm</Width>
         <ZIndex>2</ZIndex>
@@ -1896,10 +1895,10 @@
               </Style>
             </Paragraph>
           </Paragraphs>
-          <Top>0.31221cm</Top>
-          <Left>8.36598cm</Left>
-          <Height>0.73541cm</Height>
-          <Width>8.96803cm</Width>
+          <Top>0.02646cm</Top>
+          <Left>5.09838cm</Left>
+          <Height>0.64016cm</Height>
+          <Width>15.45032cm</Width>
           <Style>
             <RightBorder>
               <Style>None</Style>
@@ -1924,6 +1923,40 @@
             </Border>
           </Style>
         </Image>
+        <Textbox Name="textbox29">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Parameters!EMPRESA.Value</Value>
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontWeight>Normal</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <Top>0.74318cm</Top>
+          <Left>5.09838cm</Left>
+          <Height>0.52374cm</Height>
+          <Width>15.45032cm</Width>
+          <ZIndex>2</ZIndex>
+          <Style>
+            <RightBorder>
+              <Style>None</Style>
+            </RightBorder>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
       </ReportItems>
       <Style>
         <Border>
@@ -2137,6 +2170,13 @@
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="EMPRESA">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <EmbeddedImages>
     <EmbeddedImage Name="LOGO">
       <MIMEType>image/png</MIMEType>

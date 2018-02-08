@@ -1,4 +1,5 @@
 ﻿using Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -23,6 +24,7 @@ namespace Classes
             }
 
             [Table(name: "produtos")]
+            [Serializable]
             public class Prod : INotifyPropertyChanged
             {
                 [Key]
@@ -96,6 +98,11 @@ namespace Classes
                 /// Valor Total Bruto dos Produtos ou Serviços
                 /// </summary>
                 public string vProd { get; set; }
+                /// <summary>
+                /// Valor X Quantidade
+                /// </summary>
+                [NotMapped]
+                public decimal vProdTotal { get; set; }
                 /// <summary>
                 /// GTIN (Global Trade Item Number) da unidade tributável, antigo código EAN ou código de barras
                 /// </summary>
@@ -206,6 +213,7 @@ namespace Classes
 
                 public event PropertyChangedEventHandler PropertyChanged;
 
+                [Serializable]
                 public class Error
                 {
                     public string Message { get; set; }
