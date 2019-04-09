@@ -13,5 +13,7 @@
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("msvcr110.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("sqlserverspatial120.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("sqlservertypes/readme.htm")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("sqlservertypes/x64/msvcr100.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("sqlservertypes/x86/msvcr100.dll")]
 
 

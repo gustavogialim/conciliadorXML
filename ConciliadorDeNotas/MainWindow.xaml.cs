@@ -341,7 +341,9 @@ namespace ConciliadorDeNotas
                             DataTable pis = !ds.Tables.Contains("PIS") ? null : ds.Tables["PIS"];
                             DataColumnCollection pisCol = pis != null ? pis.Columns : null;
 
-                            var pisInstance = pis.AsEnumerable().Where(c => c.Field<int>("imposto_id") == impostoInstance.FirstOrDefault().Field<int>("imposto_id")).FirstOrDefault();
+                            DataRow pisInstance = null;
+                            if (pis != null)
+                                pisInstance = pis.AsEnumerable().Where(c => c.Field<int>("imposto_id") == impostoInstance.FirstOrDefault().Field<int>("imposto_id")).FirstOrDefault();
 
                             if (pisInstance != null)
                             {
@@ -350,10 +352,18 @@ namespace ConciliadorDeNotas
 
                                 if (PisAliq != null)
                                 {
-                                    var PisAliqInstance = PisAliq.AsEnumerable().Where(c => c.Field<int>("pis_id") == pisInstance.Field<int>("pis_id")).FirstOrDefault();
+                                    DataRow PisAliqInstanceAliq = null;
+                                    try
+                                    {
+                                        PisAliqInstanceAliq = PisAliq.AsEnumerable().Where(c => c.Field<int>("pis_id") == pisInstance.Field<int>("pis_id")).FirstOrDefault();
+                                    }
+                                    catch
+                                    {
+                                        // Não é filho de PIS 
+                                    }
 
-                                    if (PisAliqInstance != null)
-                                        detInstance.prod.CST_PIS = PisAliqCol.Contains("CST") ? PisAliqInstance.Field<string>("CST") : "";
+                                    if (PisAliqInstanceAliq != null)
+                                        detInstance.prod.CST_PIS = PisAliqCol.Contains("CST") ? PisAliqInstanceAliq.Field<string>("CST") : "";
                                 }
 
                                 DataTable PisOutr = ds.Tables["PisOutr"];
@@ -361,10 +371,18 @@ namespace ConciliadorDeNotas
 
                                 if (PisOutr != null)
                                 {
-                                    var PisAliqInstance = PisOutr.AsEnumerable().Where(c => c.Field<int>("pis_id") == pisInstance.Field<int>("pis_id")).FirstOrDefault();
+                                    DataRow PisAliqInstanceOutr = null;
+                                    try
+                                    {
+                                        PisAliqInstanceOutr = PisOutr.AsEnumerable().Where(c => c.Field<int>("pis_id") == pisInstance.Field<int>("pis_id")).FirstOrDefault();
+                                    }
+                                    catch
+                                    {
+                                        // Não é filho de PIS 
+                                    }
 
-                                    if (PisAliqInstance != null)
-                                        detInstance.prod.CST_PIS = PisOutrCol.Contains("CST") ? PisAliqInstance.Field<string>("CST") : "";
+                                    if (PisAliqInstanceOutr != null)
+                                        detInstance.prod.CST_PIS = PisOutrCol.Contains("CST") ? PisAliqInstanceOutr.Field<string>("CST") : "";
                                 }
 
                                 DataTable PisSN = ds.Tables["PISSN"];
@@ -372,10 +390,18 @@ namespace ConciliadorDeNotas
 
                                 if (PisSN != null)
                                 {
-                                    var PisAliqInstance = PisSN.AsEnumerable().Where(c => c.Field<int>("pis_id") == pisInstance.Field<int>("pis_id")).FirstOrDefault();
+                                    DataRow PisAliqInstanceSN = null;
+                                    try
+                                    {
+                                        PisAliqInstanceSN = PisSN.AsEnumerable().Where(c => c.Field<int>("pis_id") == pisInstance.Field<int>("pis_id")).FirstOrDefault();
+                                    }
+                                    catch
+                                    {
+                                        // Não é filho de PIS 
+                                    }
 
-                                    if (PisAliqInstance != null)
-                                        detInstance.prod.CST_PIS = PisSNCol.Contains("CST") ? PisAliqInstance.Field<string>("CST") : "";
+                                    if (PisAliqInstanceSN != null)
+                                        detInstance.prod.CST_PIS = PisSNCol.Contains("CST") ? PisAliqInstanceSN.Field<string>("CST") : "";
                                 }
 
 
@@ -384,10 +410,18 @@ namespace ConciliadorDeNotas
 
                                 if (PisNT != null)
                                 {
-                                    var PisAliqInstance = PisNT.AsEnumerable().Where(c => c.Field<int>("pis_id") == pisInstance.Field<int>("pis_id")).FirstOrDefault();
+                                    DataRow PisAliqInstanceNT = null;
+                                    try
+                                    {
+                                        PisAliqInstanceNT = PisNT.AsEnumerable().Where(c => c.Field<int>("pis_id") == pisInstance.Field<int>("pis_id")).FirstOrDefault();
+                                    }
+                                    catch
+                                    { 
+                                        // Não é filho de PIS 
+                                    }
 
-                                    if (PisAliqInstance != null)
-                                        detInstance.prod.CST_PIS = PisNTCol.Contains("CST") ? PisAliqInstance.Field<string>("CST") : "";
+                                    if (PisAliqInstanceNT != null)
+                                    detInstance.prod.CST_PIS = PisNTCol.Contains("CST") ? PisAliqInstanceNT.Field<string>("CST") : "";
                                 }
 
                                 DataTable PisST = ds.Tables["PISST"];
@@ -395,10 +429,16 @@ namespace ConciliadorDeNotas
 
                                 if (PisST != null)
                                 {
-                                    var PisAliqInstance = PisST.AsEnumerable().Where(c => c.Field<int>("pis_id") == pisInstance.Field<int>("pis_id")).FirstOrDefault();
+                                    DataRow PisAliqInstanceST = null;
+                                    try
+                                    {
+                                        PisAliqInstanceST = PisST.AsEnumerable().Where(c => c.Field<int>("pis_id") == pisInstance.Field<int>("pis_id")).FirstOrDefault();
+                                    } catch { 
+                                        // Não é filho de PIS 
+                                    }
 
-                                    if (PisAliqInstance != null)
-                                        detInstance.prod.CST_PIS = PisSTCol.Contains("CST") ? PisAliqInstance.Field<string>("CST") : "";
+                                    if (PisAliqInstanceST != null)
+                                        detInstance.prod.CST_PIS = PisSTCol.Contains("CST") ? PisAliqInstanceST.Field<string>("CST") : "";
                                 }
                             }
                             #endregion
@@ -408,7 +448,10 @@ namespace ConciliadorDeNotas
                             DataTable cofins = !ds.Tables.Contains("COFINS") ? null : ds.Tables["COFINS"];
                             DataColumnCollection cofinsCol = pis != null ? pis.Columns : null;
 
-                            var confinsInstance = cofins.AsEnumerable().Where(c => c.Field<int>("imposto_id") == impostoInstance.FirstOrDefault().Field<int>("imposto_id")).FirstOrDefault();
+                            DataRow confinsInstance = null;
+
+                            if (cofins != null)
+                                confinsInstance = cofins.AsEnumerable().Where(c => c.Field<int>("imposto_id") == impostoInstance.FirstOrDefault().Field<int>("imposto_id")).FirstOrDefault();
 
                             if (confinsInstance != null)
                             {
@@ -417,10 +460,18 @@ namespace ConciliadorDeNotas
 
                                 if (CofinsAliq != null)
                                 {
-                                    var CofinsAliqInstance = CofinsAliq.AsEnumerable().Where(c => c.Field<int>("cofins_id") == confinsInstance.Field<int>("cofins_id")).FirstOrDefault();
+                                    DataRow CofinsAliqInstanceAliq = null;
+                                    try
+                                    {
+                                        CofinsAliqInstanceAliq = CofinsAliq.AsEnumerable().Where(c => c.Field<int>("cofins_id") == confinsInstance.Field<int>("cofins_id")).FirstOrDefault();
+                                    }
+                                    catch
+                                    {
+                                        // Não é filho de COFINS e não tem CST 
+                                    }
 
-                                    if (CofinsAliqInstance != null)
-                                        detInstance.prod.CST_COFINS = CofinsAliqCol.Contains("CST") ? CofinsAliqInstance.Field<string>("CST") : "";
+                                    if (CofinsAliqInstanceAliq != null)
+                                        detInstance.prod.CST_COFINS = CofinsAliqCol.Contains("CST") ? CofinsAliqInstanceAliq.Field<string>("CST") : "";
                                 }
 
                                 DataTable CofinsOutr = ds.Tables["CofinsOutr"];
@@ -428,10 +479,18 @@ namespace ConciliadorDeNotas
 
                                 if (CofinsOutr != null)
                                 {
-                                    var CofinsAliqInstance = CofinsOutr.AsEnumerable().Where(c => c.Field<int>("cofins_id") == confinsInstance.Field<int>("cofins_id")).FirstOrDefault();
+                                    DataRow CofinsAliqInstanceOutr = null;
+                                    try
+                                    {
+                                        CofinsAliqInstanceOutr = CofinsOutr.AsEnumerable().Where(c => c.Field<int>("cofins_id") == confinsInstance.Field<int>("cofins_id")).FirstOrDefault();
+                                    }
+                                    catch
+                                    {
+                                        // Não é filho de COFINS e não tem CST 
+                                    }
 
-                                    if (CofinsAliqInstance != null)
-                                        detInstance.prod.CST_COFINS = CofinsOutrCol.Contains("CST") ? CofinsAliqInstance.Field<string>("CST") : "";
+                                    if (CofinsAliqInstanceOutr != null)
+                                        detInstance.prod.CST_COFINS = CofinsOutrCol.Contains("CST") ? CofinsAliqInstanceOutr.Field<string>("CST") : "";
                                 }
 
                                 DataTable CofinsSN = ds.Tables["CofinsSn"];
@@ -439,10 +498,18 @@ namespace ConciliadorDeNotas
 
                                 if (CofinsSN != null)
                                 {
-                                    var CofinsAliqInstance = CofinsSN.AsEnumerable().Where(c => c.Field<int>("cofins_id") == confinsInstance.Field<int>("cofins_id")).FirstOrDefault();
+                                    DataRow CofinsAliqInstanceSN = null;
+                                    try
+                                    {
+                                        CofinsAliqInstanceSN = CofinsSN.AsEnumerable().Where(c => c.Field<int>("cofins_id") == confinsInstance.Field<int>("cofins_id")).FirstOrDefault();
+                                    }
+                                    catch
+                                    {
+                                        // Não é filho de COFINS e não tem CST 
+                                    }
 
-                                    if (CofinsAliqInstance != null)
-                                        detInstance.prod.CST_COFINS = CofinsSNCol.Contains("CST") ? CofinsAliqInstance.Field<string>("CST") : "";
+                                    if (CofinsAliqInstanceSN != null)
+                                        detInstance.prod.CST_COFINS = CofinsSNCol.Contains("CST") ? CofinsAliqInstanceSN.Field<string>("CST") : "";
                                 }
 
                                 DataTable CofinsNT = ds.Tables["CofinsNT"];
@@ -450,10 +517,18 @@ namespace ConciliadorDeNotas
 
                                 if (CofinsNT != null)
                                 {
-                                    var CofinsAliqInstance = CofinsNT.AsEnumerable().Where(c => c.Field<int>("cofins_id") == confinsInstance.Field<int>("cofins_id")).FirstOrDefault();
+                                    DataRow CofinsAliqInstanceNT = null;
+                                    try
+                                    {
+                                        CofinsAliqInstanceNT = CofinsNT.AsEnumerable().Where(c => c.Field<int>("cofins_id") == confinsInstance.Field<int>("cofins_id")).FirstOrDefault();
+                                    }
+                                    catch
+                                    {
+                                        // Não é filho de COFINS e não tem CST 
+                                    }
 
-                                    if (CofinsAliqInstance != null)
-                                        detInstance.prod.CST_COFINS = CofinsNTCol.Contains("CST") ? CofinsAliqInstance.Field<string>("CST") : "";
+                                    if (CofinsAliqInstanceNT != null)
+                                        detInstance.prod.CST_COFINS = CofinsNTCol.Contains("CST") ? CofinsAliqInstanceNT.Field<string>("CST") : "";
                                 }
 
                                 DataTable CofinsST = ds.Tables["CofinsST"];
@@ -461,10 +536,18 @@ namespace ConciliadorDeNotas
 
                                 if (CofinsST != null)
                                 {
-                                    var CofinsAliqInstance = CofinsST.AsEnumerable().Where(c => c.Field<int>("cofins_id") == confinsInstance.Field<int>("cofins_id")).FirstOrDefault();
+                                    DataRow CofinsAliqInstanceST = null;
+                                    try
+                                    {
+                                        CofinsAliqInstanceST = CofinsST.AsEnumerable().Where(c => c.Field<int>("cofins_id") == confinsInstance.Field<int>("cofins_id")).FirstOrDefault();
+                                    }
+                                    catch
+                                    {
+                                        // Não é filho de COFINS e não tem CST 
+                                    }
 
-                                    if (CofinsAliqInstance != null)
-                                        detInstance.prod.CST_COFINS = CofinsSTCol.Contains("CST") ? CofinsAliqInstance.Field<string>("CST") : "";
+                                    if (CofinsAliqInstanceST != null)
+                                        detInstance.prod.CST_COFINS = CofinsSTCol.Contains("CST") ? CofinsAliqInstanceST.Field<string>("CST") : "";
                                 }
                             }
                             #endregion

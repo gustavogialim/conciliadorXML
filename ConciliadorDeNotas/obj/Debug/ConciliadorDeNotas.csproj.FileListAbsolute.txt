@@ -107,8 +107,10 @@ C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Enums.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Infraestrutura.dll
-C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.ReportViewer.DataVisualization.DLL
+C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.ReportViewer.Common.dll
+C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.ReportViewer.DataVisualization.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.ReportViewer.Design.DLL
+C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.ReportViewer.WebDesign.DLL
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.ReportViewer.WinForms.DLL
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.SqlServer.Types.dll
@@ -122,7 +124,6 @@ C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.VisualStudio.Shell.Interop.8.0.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\EnvDTE80.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.ReportViewer.WebForms.dll
-C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.ReportViewer.Common.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\stdole.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.VisualStudio.OLE.Interop.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.VisualStudio.TextManager.Interop.dll
@@ -160,7 +161,6 @@ C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.VisualStudio.Editor.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.VisualStudio.Debugger.Interop.11.0.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.Build.Framework.dll
-C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.VisualStudio.GraphModel.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.VisualStudio.CoreUtility.dll
@@ -216,6 +216,7 @@ C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.VisualStudio.Text.Logic.xml
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\Microsoft.VisualStudio.TextManager.Interop.10.0.xml
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\VSLangProj2.xml
+C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\pt-BR\Microsoft.VisualStudio.GraphModel.resources.dll
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.csprojResolveAssemblyReference.cache
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.csproj.ConciliadorDeNotas.exe.config
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\Dicionario.baml
@@ -240,3 +241,5 @@ C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.application
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.exe
 C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\obj\Debug\ConciliadorDeNotas.pdb
+C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\SqlServerTypes\x64\msvcr100.dll
+C:\Users\Gustavo\Documents\Projetos\conciliadorXML\ConciliadorDeNotas\bin\Debug\SqlServerTypes\x86\msvcr100.dll
