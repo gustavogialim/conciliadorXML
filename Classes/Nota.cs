@@ -1,7 +1,10 @@
 ﻿using Enums;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Windows;
 
 namespace Classes
 {
@@ -21,7 +24,8 @@ namespace Classes
             }
 
             [Table(name: "produtos")]
-            public class Prod
+            [Serializable]
+            public class Prod : INotifyPropertyChanged
             {
                 [Key]
                 public int Id { get; set; }
@@ -93,8 +97,12 @@ namespace Classes
                 /// <summary>
                 /// Valor Total Bruto dos Produtos ou Serviços
                 /// </summary>
+                public string vProd { get; set; }
+                /// <summary>
+                /// Valor X Quantidade
+                /// </summary>
                 [NotMapped]
-                public decimal vProd { get; set; }
+                public decimal vProdTotal { get; set; }
                 /// <summary>
                 /// GTIN (Global Trade Item Number) da unidade tributável, antigo código EAN ou código de barras
                 /// </summary>
@@ -141,9 +149,21 @@ namespace Classes
                 [NotMapped]
                 public int indTot { get; set; }
                 /// <summary>
-                /// CST
+                /// CST ICMS
                 /// </summary>
                 public string CST { get; set; }
+                /// <summary>
+                /// CST PIS
+                /// </summary>
+                public string CST_PIS { get; set; }
+                /// <summary>
+                /// CST COFINS
+                /// </summary>
+                public string CST_COFINS { get; set; }
+                /// <summary>
+                /// Define se o produto é Monofasico
+                /// </summary>
+                public bool? isManofasico { get; set; }
                 /// <summary>
                 /// Conciliado - Define se o produto da nota foi conciliado  com o do banco
                 /// </summary>
@@ -153,7 +173,61 @@ namespace Classes
                 /// listaErros - Lista de erros da conciliação
                 /// </summary>
                 [NotMapped]
-                public List<string> listaErros { get; set; } = new List<string>();
+                public List<Error> listaErros { get; set; } = new List<Error>();
+                /// <summary>
+                /// quantidadeErros - Quantidade de erros da conciliação
+                /// </summary>
+                [NotMapped]
+                public int quantidadeErros { get; set; } = 0;
+                /// <summary>
+                /// CorStatus - Cor do status do produto
+                /// </summary>
+                [NotMapped]
+                public string CorStatus { get; set; }
+
+                [NotMapped]
+                private Visibility visibility;
+
+                [NotMapped]
+                public Visibility Visibility
+                {
+                    get
+                    {
+                        return visibility;
+                    }
+                    set
+                    {
+                        visibility = value;
+
+                        OnPropertyChanged("Visibility");
+                    }
+                }
+
+                private void OnPropertyChanged(string info)
+                {
+                    if (PropertyChanged != null)
+                    {
+                        PropertyChanged(this, new PropertyChangedEventArgs(info));
+                    }
+                }
+
+                public event PropertyChangedEventHandler PropertyChanged;
+
+                [Serializable]
+                public class Error
+                {
+                    public string Message { get; set; }
+                }
+
+                public Prod()
+                {
+                    isManofasico = false;
+                }
+
+                public override string ToString()
+                {
+                    return $"{xProd} ({isManofasico})";
+                }
             }
 
             public class Imposto

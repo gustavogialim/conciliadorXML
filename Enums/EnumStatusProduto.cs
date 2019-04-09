@@ -2,8 +2,14 @@
 {
     public enum STATUS
     {
-        Valido,
         Invalido,
+        Valido,
         NaoConciliado
+    }
+
+    public enum IMPORTACAO
+    {
+        XML,
+        TXT
     }
 }
